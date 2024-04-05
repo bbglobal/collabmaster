@@ -1,0 +1,160 @@
+.banner {
+    padding: 40px 0;
+    margin-bottom: 3%;
+}
+
+.stripe-banner {
+    background-color: var(--black);
+}
+
+.share-banner {
+    background-color: var(--black);
+    background: var(--gradientText);
+}
+
+.banner-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 78%;
+    margin: 0 auto;
+}
+
+.banner-title {
+    font-size: 170%;
+    color: white;
+    font-weight: 600;
+    margin: 0 0 2% 0;
+}
+
+.banner-txt {
+    color: white;
+    font-size: 90%;
+}
+
+.banner-btn {
+    padding: 18px;
+    background-color: white;
+    margin-left: 8%;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+#content {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto 8% auto;
+}
+
+.listing-holder {
+    width: 78%;
+    margin: 0 auto 4% auto;
+}
+
+.listing-holder .img-row {
+    display: flex;
+    height: 440px;
+    justify-content: space-between;
+}
+
+.listing-holder .file-area {
+    height: 100%;
+    border-radius: 8px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.listing-holder .primary-img1 .img1 {
+    border-radius: 8px;
+}
+.listing-holder .primary-img1 {
+    width: 100%;
+}
+
+.listing-holder .img1 {
+    border-radius: 8px 0 0 8px;
+}
+
+.listing-holder .img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-holder {
+    display: flex;
+    margin-top: 2%;
+}
+
+.listing-description {
+    line-height: 1.4;
+    font-size: 95%;
+    margin-top: 2%;
+    font-weight: 300;
+}
+
+.section-title {
+    display: flex;
+    align-items: baseline;
+    margin: 5% 0 2% 0;
+    font-size: 135%;
+    font-weight: 600;
+}
+
+.packages-holder {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px px;
+}
+
+.create-campaign-btn {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 18px 20px;
+    font-size: 90%;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0;
+    box-shadow: var(--lightBoxShadow);
+    border-radius: 8px;
+    transition-duration: 0.3s;
+    background-color: var(--black);
+    text-decoration: none;
+    color: white;
+}
+
+.create-campaign-btn-img {
+    width: 13px;
+    margin-right: 6px;
+}
+
+@media only screen and (max-width: 800px) {
+    .banner {
+        margin-bottom: 0;
+        padding: 22px 0;
+    }
+
+    .banner-row {
+        width: 92%;
+    }
+
+    .banner-btn {
+        max-width: 75%;
+        width: fit-content;
+    }
+
+    .banner-title {
+        font-size: 130%;
+        margin: 0 0 3% 0;
+    }
+
+    .banner-txt {
+        font-size: 68%;
+    }
+
+    .banner-btn {
+        padding: 16px;
+        font-size: 90%;
+    }
+}
