@@ -15,6 +15,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
+use Throwable;
 use Validator;
 
 class IndexController extends Controller
@@ -622,24 +624,9 @@ class IndexController extends Controller
 
     public function order_process(Request $request)
     {
-        $controlls = $request->all();
-        // dd($controlls);
-        $rules = array(
-            "user_id" => "required",
-            "package_id" => "required",
-            "full_name" => "required",
-            "address" => "required",
-            "description" => "required",
-            "price" => "required",
-            "status" => "required"
-        );
-
-        $validator = Validator::make($controlls, $rules);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput($controlls);
-        } else {
+        try {
             $order = new Order;
-            $order->user_id = $request->user_id;
+            $order->brand_id = $request->user_id;
             $order->package_id = $request->package_id;
             $order->creator_id = $request->creator_id;
             $order->full_name = $request->full_name;
@@ -647,10 +634,27 @@ class IndexController extends Controller
             $order->description = $request->description;
             $order->package_content_type = $request->package_content_type;
             $order->price = $request->price;
-            $order->status = $request->status;
+            $order->payment_method = $request->status;
+            $order->razorpay_payment_id = $request->razorpay_payment_id;
+            $order->razorpay_order_id = $request->razorpay_order_id;
+            $order->razorpay_signature = $request->razorpay_signature;
+            $order->payment_status = 'Pending';
             $order->save();
-
-            return redirect()->route('home')->with(['success' => "Order Successfully Created"]);
+            $payment_id = $request->razorpay_payment_id;
+            Http::withBasicAuth(env('RAZORPAYKEY'), env('RAZORPAYSECRET'))
+                ->post('https://api.razorpay.com/v1/payments/' . $payment_id . '/capture', [
+                    'amount' => ((int) $request->price + (((int) $request->price * 10) / 100)) * 100,
+                    'currency' => $request->currency,
+                ]);
+            return response()->json([
+                'status' => true,
+                'message' => "Order Successfully Created",
+            ]);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ]);
         }
     }
 
@@ -670,6 +674,27 @@ class IndexController extends Controller
             $status->save();
 
             return redirect()->back()->withSuccess("Conformation Status Successfully Changed");
+        }
+    }
+
+
+    public function create_payment_order(Request $request)
+    {
+        try {
+            $response = Http::withBasicAuth(env('RAZORPAYKEY'), env('RAZORPAYSECRET'))
+                ->post('https://api.razorpay.com/v1/orders', [
+                    'amount' => $request->amount,
+                    'currency' => $request->currency,
+                ]);
+            return response()->json([
+                'status' => true,
+                'data' => json_decode($response->body()),
+            ]);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ]);
         }
     }
 

@@ -8,7 +8,6 @@
 
         .progress-bar {
             display: flex;
-            flex-direction: row;
             align-items: center;
             background-color: rgba(191, 203, 218, .12);
             font-size: 85%;
@@ -456,24 +455,35 @@
         </div>
     </div>
     <div id="content">
+        <div class="progress-bar">
+            <div class="progress-step" data-id="0">
+                <div class="step-num">1</div>
+                <div class="step-txt">Place Order</div>
+            </div>
+            <div class="progress-step" data-id="1">
+                <div class="step-num">2</div>
+                <div class="step-txt">Submit Requirements</div>
+            </div>
+        </div>
         <div class="form-holder">
             <div>
                 <div class="form-section">
                     <div class="form-title">Place Order</div>
 
                     <!--<div class="form-desc">A hold on your payment method will be placed for 72 hours. You will only be charged if Ina accepts your request.</div>-->
-                    <div class="form-desc">Your payment will be held for 72 hours. If {{ $package->username }} declines the
-                        order, the amount
+                    <div class="form-desc">Your payment will be held for 72 hours. If Ina declines the order, the amount
                         will be added to your Collabstr balance.</div>
 
 
                     <div class="checkout-row">
-                        <form action="{{ route('order.process') }}" class="checkout-col checkout-form" method="POST">
+                        <form class="checkout-col checkout-form" method="POST">
                             @csrf
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="package_id" value="{{ $package->id }}">
-                            <input type="hidden" name="creator_id" value="{{ $package->user_id }}">
-                            <input type="hidden" name="package_content_type" value="{{ $package->package_content_type_ }}">
+                            {{-- <input type="hidden" id="token" value="{{Auth::user()->id}}"> --}}
+                            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" id="package_id" name="package_id" value="{{ $package->id }}">
+                            <input type="hidden" id="creator_id" name="creator_id" value="{{ $package->user_id }}">
+                            <input type="hidden" id="package_content_type" name="package_content_type"
+                                value="{{ $package->package_content_type_ }}">
                             <input type="hidden" name="price"
                                 value="{{ ($package->package_price_ * 10) / 100 + $package->package_price_ }}.00">
 
@@ -488,22 +498,22 @@
 
                                 <div class="card-input-holder my-3">
                                     <input id="full-name" type="text" class="form-control form-control-lg"
-                                        name="full_name" autofocus placeholder="Full Name">
+                                        name="full_name" autofocus placeholder="Full Name" required>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('full_name') }}</span>
 
 
                                 <div class="card-input-holder my-3">
                                     <input id="address" type="text" class="form-control form-control-lg" name="address"
-                                        autofocus placeholder="Your Premanent Address">
+                                        autofocus placeholder="Your Permenant Address" required>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('address') }}</span>
 
 
                                 <div class="card-input-holder my-3">
-                                    <select name="status" class="form-control form-control-lg" id="payment-type" autofocus>
-                                        <option>--Select--</option>
-                                        <option value="Case On Delivery">Cash on Delivery</option>
+                                    <select name="status" class="form-control form-control-lg" id="payment-type" autofocus
+                                        required>
+                                        <option value="Razorpay">Razorpay</option>
                                     </select>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('status') }}</span>
@@ -511,8 +521,7 @@
 
                                 <div class="card-input-holder my-3">
                                     <textarea name="description" class="form-control form-control-lg" id="message" autofocus
-                                        placeholder="Message (Optional)" placeholder="Full Name">
-                                    </textarea>
+                                        placeholder="Message (Optional)" placeholder="Full Name"></textarea>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('description') }}</span>
 
@@ -526,7 +535,7 @@
                                 </div> --}}
                             </div>
 
-                            <button class='btn' type="submit">Place Order</button>
+                            <button class='btn' type="submit" id="place_order">Place Order</button>
 
                             {{-- <div class="payment-request-holder">
                                 <div class="seperator"><span>or</span></div>
@@ -546,14 +555,14 @@
                             <div>
                                 <div class="price-row">
                                     <div>Subtotal</div>
-                                    <div>&#8377;{{ $package->package_price_ }}.00</div>
+                                    <div>${{ $package->package_price_ }}.00</div>
                                 </div>
                                 <div class="price-row">
                                     <div class="">Fee <img class="tooltip-img"
                                             src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/tooltip.svg"
                                             title="This helps us operate our platform and cover payment processing fees.">
                                     </div>
-                                    <div>&#8377;{{ ($package->package_price_ * 10) / 100 }}.00</div>
+                                    <div>${{ ($package->package_price_ * 10) / 100 }}.00</div>
                                 </div>
                                 <div class="price-row tax-row">
                                     <div>Tax</div>
@@ -563,7 +572,7 @@
                                 <div class="price-row total-price-row">
                                     <div>Total</div>
                                     <div id="total-price">
-                                        &#8377;{{ ($package->package_price_ * 10) / 100 + $package->package_price_ }}.00 INR
+                                        ${{ ($package->package_price_ * 10) / 100 + $package->package_price_ }}.00 USD
                                     </div>
                                 </div>
                             </div>
@@ -576,7 +585,7 @@
                                 <div class="guide-num">1</div>Place Order
                             </div>
                             <!--<div class="guide-txt">Submit the details of the collaboration. Ina has 72 hours to accept your request before the hold on your card is removed.</div>-->
-                            <div class="guide-txt">Submit the details of the collaboration. {{ $package->username }} has 72 hours to accept your
+                            <div class="guide-txt">Submit the details of the collaboration. Ina has 72 hours to accept your
                                 request, otherwise the amount is added to your Collabstr balance.</div>
                         </div>
 
@@ -584,7 +593,8 @@
                             <div class="guide-title">
                                 <div class="guide-num">2</div>Chat With Influencer
                             </div>
-                            <div class="guide-txt">Chat with {{ $package->username }} and arrange the collaboration. Your funds are held securely
+                            <div class="guide-txt">Chat with Ina and arrange the collaboration. Your funds are held
+                                securely
                                 until they complete the work.</div>
                         </div>
 
@@ -592,99 +602,123 @@
                             <div class="guide-title">
                                 <div class="guide-num">3</div>Receive Content
                             </div>
-                            <div class="guide-txt">Receive your content to review and approve. The collaboration is complete
+                            <div class="guide-txt">Receive your content to review and approve. The collaboration is
+                                complete
                                 and payment is released to the influencer.</div>
                         </div>
                     </div>
 
                 </div>
-
-                <form class="form-section question-form">
-                    @csrf
-                    <div class="form-title">Submit Requirements</div>
-                    <div class="form-desc">Let Ina know what you are looking for.</div>
-                    <div>
-                        <div class="box-holder">
-                            <div class="box-title">Describe the product/service you are promoting</div>
-                            <textarea class="input textarea" name="description"
-                                placeholder="E.g. We just launched our summer dress collection and want you to promote our sundresses that are 100% handmade"
-                                maxlength="800" required></textarea>
-                        </div>
-
-                        <div class="box-holder">
-                            <div class="box-title">What are the content requirements?</div>
-                            <textarea class="input textarea" name="content_requirements"
-                                placeholder="E.g. We would like you to style the dress with different accessories and make the content vibrant and colorful"
-                                maxlength="800" required></textarea>
-                        </div>
-
-                        <div class="box-holder">
-                            <div class="box-title">Select all that apply</div>
-
-                            <div class="gender-option">
-                                <div class="gender-circle">
-                                    <div class="gender-selected"></div>
-                                </div>
-                                <div>Content approval required before posting?</div>
-                                <input type="hidden" name="content_approval" value="">
-                            </div>
-
-                            <div class="gender-option shipping-option">
-                                <div class="gender-circle">
-                                    <div class="gender-selected"></div>
-                                </div>
-                                <div>Are you shipping a physical product?</div>
-                                <input type="hidden" name="shipping_info" value="">
-                            </div>
-
-                            <input class="input product-cost" type="number" name="product_cost"
-                                placeholder="What is your cost on the product (USD)" min="0">
-                        </div>
-
-                        <div class="box-holder">
-                            <div class="box-title">What do you need from Ina to get started?</div>
-                            <textarea class="input textarea" name="info_needed"
-                                placeholder="E.g. Please send us your dress size and color preference" maxlength="800"></textarea>
-                        </div>
-
-
-
-                        <div class="box-holder">
-                            <div class="box-title">When do you expect the content to be delivered by?</div>
-                            <div class="box-subtitle">This helps Ina understand your timeline. It should be used as a
-                                guideline and not a deadline.</div>
-                            <input class="input" type="text" placeholder="MM/DD/YYYY" name="delivery_date">
-                        </div>
-
-                        <div>
-                            <label class="remember-holder">Save answers for re-use
-                                <input type="checkbox" name="saved_answers">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-
-                        <div class="box-holder name-answers-holder">
-                            <input class="input" name="saved_answers_name" placeholder="Give your saved answers a name"
-                                maxlength="255" />
-                        </div>
-
-                    </div>
-
-                    <input type='hidden' name='campaign_id'>
-                    <button class='btn question-btn'>Continue</button>
-                </form>
             </div>
         </div>
 
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
         <script>
-            function copyLink() {
-                let textArea = document.createElement("textarea");
-                textArea.value = 'https://collabstr.com/user';
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand("Copy");
-                textArea.remove();
-                showMsg('Profile URL copied to clipboard.', 'succ')
+            document.getElementById('place_order').onclick = function(e) {
+                e.preventDefault();
+                const price = @json($package->package_price_);
+                const amount = parseFloat(price) + ((parseFloat(price) * 10) / 100);
+                const name = document.getElementById('full-name').value;
+                const email = @json(auth()->user()->email) ?? '';
+                const phone_number = @json(auth()->user()->phone_number) ?? '';
+                $.ajax({
+                    url: "{{ route('create_payment_order') }}",
+                    type: 'GET',
+                    cache: false,
+                    data: {
+                        amount: encodeURIComponent(amount * 100),
+                        currency: encodeURIComponent("INR"),
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            var orderId = response.data.id;
+                            var options = {
+                                "key": "{{ env('RAZORPAYKEY') }}", // Enter the Key ID generated from the Dashboard
+                                "amount": price, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                                "currency": "INR",
+                                "name": "Collab Master", //your business name
+                                "description": "",
+                                "image": "https://example.com/your_logo",
+                                "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                                "handler": function(response) {
+                                    function calculateHmacSHA256(data, key) {
+                                        return CryptoJS.HmacSHA256(data, key).toString(CryptoJS.enc
+                                            .Hex);
+                                    }
+                                    var razorpayOrderId = response.razorpay_order_id;
+                                    var razorpayPaymentId = response.razorpay_payment_id;
+                                    var razorpaySignature = response.razorpay_signature;
+                                    var secret = "{{ env('RAZORPAYSECRET') }}";
+                                    var generated_signature = calculateHmacSHA256(razorpayOrderId +
+                                        "|" + razorpayPaymentId, secret);
+                                    if (generated_signature === razorpaySignature) {
+                                        $.ajax({
+                                            url: "{{ route('order.process') }}",
+                                            type: 'POST',
+                                            cache: false,
+                                            data: {
+                                                _token: document.querySelector(
+                                                    '[name="_token"]').value,
+                                                user_id: document.getElementById('user_id')
+                                                    .value,
+                                                package_id: document.getElementById(
+                                                    'package_id').value,
+                                                creator_id: document.getElementById(
+                                                    'creator_id').value,
+                                                package_content_type: document.getElementById(
+                                                    'package_content_type').value,
+                                                address: document.getElementById('address')
+                                                    .value,
+                                                status: document.getElementById('payment-type')
+                                                    .value,
+                                                description: document.getElementById('message')
+                                                    .value,
+                                                full_name: name,
+                                                price: price,
+                                                razorpay_payment_id: razorpayPaymentId,
+                                                razorpay_order_id: razorpayOrderId,
+                                                razorpay_signature: razorpaySignature,
+                                            },
+                                            success: function(response) {
+                                                if (response.status) {
+                                                    console.log(response.message);
+                                                    window.location.href =
+                                                        "{{ route('home') }}";
+                                                } else {
+                                                    console.log(response.message);
+                                                }
+                                            },
+                                            error: function(error) {
+                                                console.log(error);
+                                            }
+                                        });
+                                    } else {
+                                        console.log("Payment verification failed");
+                                    }
+                                },
+                                "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+                                    "name": name, //your customer's name
+                                    "email": email,
+                                    "contact": phone_number //Provide the customer's phone number for better conversion rates
+                                },
+                                "notes": {
+                                    "address": "Razorpay Corporate Office"
+                                },
+                                "theme": {
+                                    "color": "#3399cc"
+                                }
+                            };
+                            var rzp1 = new Razorpay(options);
+                            rzp1.open();
+                        } else {
+                            console.log(response.message);
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
             }
         </script>
     @endsection

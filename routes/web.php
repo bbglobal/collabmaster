@@ -142,6 +142,7 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/orders',  'orders')->name('creator.orders');
     Route::get('/lists',  'lists')->name('like.lists');
     Route::get('/checkout/{id}',  'checkout')->name('brand.checkout');
+    Route::get('/create/payment/order',  'create_payment_order')->name('create_payment_order');
     Route::get('/create-offer/{id}',  'createOffer')->name('offer.create');
     Route::post('/order/process',  'order_process')->name('order.process');
     Route::post('/order/conformation/process',  'order_conformation_process')->name('order.conformation.process');
