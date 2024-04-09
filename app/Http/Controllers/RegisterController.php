@@ -569,7 +569,7 @@ class RegisterController extends Controller
 
         $formData['user_id'] = $user->id;
 
-        dd($formData);
+        // dd($formData);
         Campaign::create($formData);
 
         $request->session()->forget(['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7', 'file_path', 'img_1', 'img_2', 'img_3', 'img_4', 'c_9', 'c_10']);

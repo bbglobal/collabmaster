@@ -117,7 +117,7 @@
                                         class="link-spanner"></span></a>
                                 <div class="profile-listing-img-holder">
                                     <img loading="lazy" class="profile-listing-img" alt="{{ $row->name }}'s campaign"
-                                        src="{{ url('assets/images/' . $row->img_files) }}">
+                                        src="{{ url('assets/images/' . $row->file_path) }}">
                                     <div class="profile-listing-owner-holder">
                                         <div class="profile-listing-owner-info-holder">
                                             <div class="profile-listing-owner-name">{{ $row->name }}</div>
