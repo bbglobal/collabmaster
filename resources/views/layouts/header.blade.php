@@ -174,6 +174,11 @@
                                     @else
                                         <ul class="nk-menu nk-menu-main pr-0" id="others">
                                             <li class="nk-menu-item">
+                                                <a href="{{ route('brand.campaigns') }}" class="nk-menu-link">
+                                                    <span class="nk-menu-text">Campaigns</span>
+                                                </a>
+                                            </li>
+                                            <li class="nk-menu-item">
                                                 <a href="{{ route('creator.orders') }}" class="nk-menu-link">
                                                     <span class="nk-menu-text">Orders</span>
                                                 </a>

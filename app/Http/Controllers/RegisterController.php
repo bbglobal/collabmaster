@@ -484,9 +484,44 @@ class RegisterController extends Controller
                 return view('campaign.c-8');
                 break;
             case '9':
+
+
+                // dd($request->all());
+
+                $request->validate([
+                    'img_files' => 'required',
+                    'img1' => 'required',
+                    'img2' => 'required',
+                    'img3' => 'required',
+                    'img4' => 'required',
+                ]);
+
                 $img = $request->file('img_files')->getClientOriginalName();
                 $request->file('img_files')->move('assets/images', $img);
                 $request->session()->put('file_path', 'assets/images/' . $img);
+
+                $imgOne = $request->file('img1')->getClientOriginalName();
+                $request->file('img1')->move('assets/images', $imgOne);
+                $request->session()->put('img_1', $imgOne);
+
+                if ($request->hasFile('img2')) {
+                    $imgTwo = $request->file('img2')->getClientOriginalName();
+                    $request->file('img2')->move('assets/images', $imgTwo);
+                    $request->session()->put('img_2', $imgTwo);
+                }
+
+                if ($request->hasFile('img3')) {
+                    $imgThree = $request->file('img3')->getClientOriginalName();
+                    $request->file('img3')->move('assets/images', $imgThree);
+                    $request->session()->put('img_3', $imgThree);
+                }
+
+                if ($request->hasFile('img4')) {
+                    $imgFour = $request->file('img4')->getClientOriginalName();
+                    $request->file('img4')->move('assets/images', $imgFour);
+                    $request->session()->put('img_4', $imgFour);
+                }
+
                 return view('campaign.c-9');
                 break;
             case '10':
@@ -505,6 +540,12 @@ class RegisterController extends Controller
         $request->file('files')->move('assets/images', $img);
         $request->session()->put('files', 'assets/images/' . $img);
 
+        $formData['file_path'] = $request->session()->get('file_path', '');
+        $formDataOne['img_1'] = $request->session()->get('img_1', '');
+        $formDataTwo['img_2'] = $request->session()->get('img_2', '');
+        $formDataThree['img_3'] = $request->session()->get('img_3', '');
+        $formDataFour['img_4'] = $request->session()->get('img_4', '');
+
         $user = Auth::user();
 
         $formData = array_merge(
@@ -515,7 +556,11 @@ class RegisterController extends Controller
             $request->session()->get('c_5', []),
             $request->session()->get('c_6', []),
             $request->session()->get('c_7', []),
-            $request->session()->get('c_8', []),
+            $formData,
+            $formDataOne,
+            $formDataTwo,
+            $formDataThree,
+            $formDataFour,
             $request->session()->get('c_9', []),
             $request->session()->get('c_10', []),
         );
@@ -524,14 +569,14 @@ class RegisterController extends Controller
 
         $formData['user_id'] = $user->id;
 
-        // dd($formData);
+        dd($formData);
         Campaign::create($formData);
 
-        $request->session()->forget(['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7', 'c_8', 'c_9', 'c_10']);
+        $request->session()->forget(['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7', 'file_path', 'img_1', 'img_2', 'img_3', 'img_4', 'c_9', 'c_10']);
 
         $campaign = Campaign::all();
         $data = compact('campaign');
-        return view('profile')->with($data);
+        return redirect('profile/' . Auth::user()->id)->with($data);
     }
 
     function login(Request $request)

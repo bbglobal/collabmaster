@@ -132,8 +132,8 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/pricing',  'pricing')->name('pricing.page');
     Route::get('/profile/{id}',  'profile')->name('profile.page');
     Route::get('/edit-page/{id}',  'editProfile')->name('profile.edit');
-    Route::get('/create-campaign/{id}',  'createCampaign')->name('create.campaign');
-    Route::get('/get-started/{id}',  'getStarted')->name('create.campaign');
+    Route::get('/start-campaign/{id}',  'createCampaign')->name('start.campaign');
+    Route::get('/get-started/{id}',  'getStarted')->name('get.started');
     Route::get('/phone-verifcation',  'phoneNumber')->name('phone.number');
     Route::get('/verify-phone-number',  'otp')->name('verification.form');
     Route::get('/payment-verification',  'payment')->name('card.verification');

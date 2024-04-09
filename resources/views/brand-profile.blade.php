@@ -31,14 +31,14 @@
                     <div class="banner-txt">Your profile is the first thing creators view to learn about your brand. Having
                         a complete, detailed profile helps creators decide if you're a fit to collaborate with.</div>
                 </div>
-                <div onclick="location.href='/edit-page/{{ Auth::user()->id }}'" class="btn banner-btn">Complete Profile</div>
+                <div onclick="location.href='/edit-page/{{ Auth::user()->id }}'" class="btn banner-btn">Complete Profile
+                </div>
             </div>
         </div>
 
 
         <div class="btn-row btn-row-mobile">
-            <div onclick="location.href='/edit-page/{{ Auth::user()->id }}'" class="row-btn"><img
-                    class="row-btn-img"
+            <div onclick="location.href='/edit-page/{{ Auth::user()->id }}'" class="row-btn"><img class="row-btn-img"
                     src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/edit.svg">Edit</div>
         </div>
 
@@ -103,21 +103,21 @@
                 <div class="section-title">Campaigns</div>
                 @if ($campaigns->isEmpty())
                     <div class="packages-holder">
-                        <a href="/create-campaign" class="create-campaign-btn">
+                        <a href="{{ route('start.campaign', ['id' => 1]) }}" class="create-campaign-btn">
                             <img loading="lazy" class="create-campaign-btn-img"
                                 src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/create.svg">Create
                             Campaign
                         </a>
                     </div>
                 @else
-                    @foreach ($campaigns as $row)
-                        <div class="packages-holder">
+                    <div class="packages-holder">
+                        @foreach ($campaigns as $row)
                             <div class="profile-listing-holder">
                                 <a href="/brandboostesr/{{ $row->slug }}" target="_blank"><span
                                         class="link-spanner"></span></a>
                                 <div class="profile-listing-img-holder">
                                     <img loading="lazy" class="profile-listing-img" alt="{{ $row->name }}'s campaign"
-                                        src="{{ $row->image_url ?: 'https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/noPic.png' }}">
+                                        src="{{ url('assets/images/' . $row->img_files) }}">
                                     <div class="profile-listing-owner-holder">
                                         <div class="profile-listing-owner-info-holder">
                                             <div class="profile-listing-owner-name">{{ $row->name }}</div>
@@ -126,8 +126,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 @endif
 
 

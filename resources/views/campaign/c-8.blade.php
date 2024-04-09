@@ -10,6 +10,12 @@
             max-height: none;
         }
 
+        .img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
         @media (min-width: 576px) {
             .wide-xs {
                 max-width: 70% !important;
@@ -40,148 +46,90 @@
 
 
                         <div class="nk-block nk-block-middle nk-auth-body wide-xs pt-0">
-                            <div class="card mt-5">
-                                <div class="card-inner card-inner p-0">
-                                    <div class="nk-block-head">
+                            {{-- <div class="progress progress-lg">
+                                <div class="progress-bar" id="progressBar" data-progress="25">25%</div>
+                            </div> --}}
+                            <div id="s-1">
+                                <div class="card">
+                                    <div class="card-inner card-inner p-0">
                                         <div class="top-btn-holder">
-                                            <div class="example-profile-btn">View Example Campaign</div>
+                                            {{-- <div class="example-profile-btn">View Example Campaign</div> --}}
                                             <div class="step-holder">8/10</div>
                                         </div>
-                                        <div class="nk-block-head-content">
-                                            <h3 class="nk-block-title">
-                                                <b>Add up to 4 images of the product and content
-                                                    examples</b>
-                                            </h3>
-                                        </div>
-                                    </div>
-
-                                    <form method="POST" action="{{ route('create.campaign', ['id' => 9]) }}" class="form"
-                                        id="form" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="scroll-holder scroll-holder-wide">
-
-                                            <div class="img-row">
-                                                <!-- overlay -->
-                                                <div class="upload-img-overlay">
-                                                    <div class="upload-btn-overlay">
-                                                        <input type="file"
-                                                            class="img-file-input file-input js-img-file-input"
-                                                            name="img_files" accept="image/*" multiple />
-                                                        <div class="upload-img-btn btn">
-                                                            <img class="upload-btn-img"
-                                                                src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/upload.svg">Upload
-                                                            Photos
-                                                        </div>
-                                                    </div>
-                                                    <div class="primary-img">
-                                                        <div class="file-area"></div>
-                                                    </div>
-                                                    <div class="img-col">
-                                                        <div class="img-row-sq">
-                                                            <div class="file-area"></div>
-                                                            <div class="file-area"></div>
-                                                        </div>
-                                                        <div class="file-area file-area4"></div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- overlay end -->
-
-                                                <div class="primary-img">
-                                                    <div class="file-area">
-                                                        <div class="cover-img-badge">Cover Photo</div>
-                                                        <input id="required-img" onchange="showImg(this,0)"
-                                                            class="img-input" type="file" name="img1"
-                                                            accept="image/*">
-                                                        <img class="img img1"
-                                                            src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/defaultCover.png">
-                                                    </div>
-                                                </div>
-                                                <div class="img-col">
-                                                    <div class="img-row-sq">
-                                                        <div class="file-area">
-                                                            <!-- menu btn -->
-                                                            <div class="more-img-holder">
-                                                                <div class="more-img-badge">&#8226;&#8226;&#8226;</div>
-                                                                <div class="more-img-dropdown-holder">
-
-                                                                    <div class="more-img-dropdown-item" data-action="cover"
-                                                                        data-id="2">Make cover
-                                                                        photo</div>
-
-                                                                    <div class="more-img-dropdown-item" data-action="delete"
-                                                                        data-id="2">Delete</div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- menu btn end -->
-
-                                                            <input onchange="showImg(this,1)" class="img-input"
-                                                                type="file" name="img2" accept="image/*">
-                                                            <img class="img img2"
-                                                                src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/default.png">
-                                                        </div>
-                                                        <div class="file-area">
-                                                            <!-- menu btn -->
-                                                            <div class="more-img-holder">
-                                                                <div class="more-img-badge">&#8226;&#8226;&#8226;</div>
-                                                                <div class="more-img-dropdown-holder">
-
-                                                                    <div class="more-img-dropdown-item" data-action="cover"
-                                                                        data-id="3">Make cover
-                                                                        photo</div>
-
-                                                                    <div class="more-img-dropdown-item" data-action="delete"
-                                                                        data-id="3">Delete</div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- menu btn end -->
-
-                                                            <input onchange="showImg(this,2)" class="img-input"
-                                                                type="file" name="img3" accept="image/*">
-                                                            <img class="img img3"
-                                                                src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/default.png">
-                                                        </div>
-                                                    </div>
-                                                    <div class="file-area file-area4">
-                                                        <!-- menu btn -->
-                                                        <div class="more-img-holder">
-                                                            <div class="more-img-badge">&#8226;&#8226;&#8226;</div>
-                                                            <div class="more-img-dropdown-holder">
-
-                                                                <div class="more-img-dropdown-item" data-action="cover"
-                                                                    data-id="4">Make cover
-                                                                    photo</div>
-
-                                                                <div class="more-img-dropdown-item" data-action="delete"
-                                                                    data-id="4">Delete</div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- menu btn end -->
-
-                                                        <input onchange="showImg(this,3)" class="img-input"
-                                                            type="file" name="img4" accept="image/*">
-                                                        <img class="img img4"
-                                                            src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/default.png">
-                                                    </div>
-                                                </div>
+                                        <div class="nk-block-head my-5">
+                                            <div class="nk-block-head-content">
+                                                <br />
+                                                <h3 class="nk-block-title"><b>Add up to 4 images of the product and content examples</b>
+                                                </h3>
                                             </div>
                                         </div>
 
-                                        <div class="form-group mb-3">
-                                            <button type="submit" class="btn btn-lg btn-secondary btn-block s-2-con"
-                                                id="primary">Continue</button>
+                                        <a href="{{ route('create.campaign', ['id' => 7]) }}" class="top-btn-holder d-block">
+                                            <svg class="back-btn" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path
+                                                    d="M19 11H7.83l4.882-4.882a1 1 0 000-1.413h-.005a1 1 0 00-1.408 0L4.705 11.3a1 1 0 000 1.41L11.3 19.3a1 1 0 001.41 0 1 1 0 000-1.41L7.83 13H19a1 1 0 001-1 1 1 0 00-1-1z">
+                                                </path>
+                                            </svg>
+                                        </a>
 
-                                            <button class="btn btn-lg btn-secondary btn-block d-none" id="loading"
-                                                type="button" disabled>
-                                                <span class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                <span>Loading...</span>
-                                            </button>
-                                        </div>
-                                    </form>
+                                        <form method="POST" action="{{ route('create.campaign', ['id' => 9]) }}" class="form"
+                                            id="form" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="scroll-holder scroll-holder-wide">
+                                                <div id='file-area-prof-pic'>
+                                                    <img class='profile-img'
+                                                        src='{{ url('assets/websiteImages/creatorMarketplace/addProfPic.png') }}'>
+                                                    <input id='file-input' type='file' name='img_files' accept='image/*'>
+                                                </div>
 
-                                    <div class="login-forgot forgot w-100 text-center my-4">
-                                        <a href="#" class="text-dark">I didn't receive an email</a>.
+                                                <div class="img-row">
+                                                    <div class="primary-img">
+                                                        <div class="file-area">
+                                                            <div class="cover-img-badge">Cover Photo</div>
+                                                            <input class="img-input" type="file" id="img1"
+                                                                name="img1" accept="image/*">
+                                                            <img class="img img1"
+                                                                src="{{ url('assets/websiteImages/creatorMarketplace/default.png') }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="img-col">
+                                                        <div class="img-row-sq">
+                                                            <div class="file-area">
+                                                                <input class="img-input" id="img2" type="file"
+                                                                    name="img2" accept="image/*">
+                                                                <img class="img img2"
+                                                                    src="{{ url('assets/websiteImages/creatorMarketplace/default.png') }}">
+                                                            </div>
+                                                            <div class="file-area">
+                                                                <input class="img-input" type="file" name="img3"
+                                                                    id="img3" accept="image/*">
+                                                                <img class="img img3"
+                                                                    src="{{ url('assets/websiteImages/creatorMarketplace/default.png') }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="file-area file-area4">
+                                                            <input class="img-input" type="file" name="img4"
+                                                                id="img4" accept="image/*">
+                                                            <img class="img img4"
+                                                                src="{{ url('assets/websiteImages/creatorMarketplace/default.png') }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <button type="submit" class="btn btn-lg btn-secondary btn-block s-2-con"
+                                                    id="primary">Continue</button>
+
+                                                <button class="btn btn-lg btn-secondary btn-block d-none" id="loading"
+                                                    type="button" disabled>
+                                                    <span class="spinner-border spinner-border-sm" role="status"
+                                                        aria-hidden="true"></span>
+                                                    <span>Loading...</span>
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -204,6 +152,117 @@
                 $(this).find('.platform-option').hide();
                 $(this).find('.input-row').show();
             });
+
+            const fileInput = document.getElementById('file-input');
+            const imgInput = document.getElementById('img1');
+            const imgInputTwo = document.getElementById('img2');
+            const imgInputThree = document.getElementById('img3');
+            const imgInputFour = document.getElementById('img4');
+            // Add event listener to detect changes in the file input
+            fileInput.addEventListener('change', function(event) {
+                // Get the selected file
+                const selectedFile = event.target.files[0];
+
+                // Check if a file was selected
+                if (selectedFile) {
+                    // Read the selected file as a URL
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        // Update the image source with the selected file's URL
+                        const imageUrl = event.target.result;
+                        document.querySelector('.profile-img').setAttribute('src', imageUrl);
+                    };
+
+                    // Read the selected file as a data URL
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+
+            // Add event listener to detect changes in the file input
+            imgInput.addEventListener('change', function(event) {
+                // Get the selected file
+                const selectedFile = event.target.files[0];
+
+                // Check if a file was selected
+                if (selectedFile) {
+                    // Read the selected file as a URL
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        // Update the image source with the selected file's URL
+                        const imageUrl = event.target.result;
+                        document.querySelector('.img1').setAttribute('src', imageUrl);
+                    };
+
+                    // Read the selected file as a data URL
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+
+            // Add event listener to detect changes in the file input
+            imgInputTwo.addEventListener('change', function(event) {
+                // Get the selected file
+                const selectedFile = event.target.files[0];
+
+                // Check if a file was selected
+                if (selectedFile) {
+                    // Read the selected file as a URL
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        // Update the image source with the selected file's URL
+                        const imageUrl = event.target.result;
+                        document.querySelector('.img2').setAttribute('src', imageUrl);
+                    };
+
+                    // Read the selected file as a data URL
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+
+            // Add event listener to detect changes in the file input
+            imgInputThree.addEventListener('change', function(event) {
+                // Get the selected file
+                const selectedFile = event.target.files[0];
+
+                // Check if a file was selected
+                if (selectedFile) {
+                    // Read the selected file as a URL
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        // Update the image source with the selected file's URL
+                        const imageUrl = event.target.result;
+                        document.querySelector('.img3').setAttribute('src', imageUrl);
+                    };
+
+                    // Read the selected file as a data URL
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+
+            // Add event listener to detect changes in the file input
+            imgInputFour.addEventListener('change', function(event) {
+                // Get the selected file
+                const selectedFile = event.target.files[0];
+
+                // Check if a file was selected
+                if (selectedFile) {
+                    // Read the selected file as a URL
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        // Update the image source with the selected file's URL
+                        const imageUrl = event.target.result;
+                        document.querySelector('.img4').setAttribute('src', imageUrl);
+                    };
+
+                    // Read the selected file as a data URL
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+
         });
     </script>
 @endsection
