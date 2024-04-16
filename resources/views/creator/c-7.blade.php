@@ -38,16 +38,6 @@
             </div>
         </div>
     @endif
-    @if ($errors->has('img') || $errors->has('img1') || $errors->has('img2') || $errors->has('img3') || $errors->has('img4'))
-        <div id="msg-holder">
-            <div id="msg-holder-row">
-                <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/err.svg" id="msg-img-err"
-                    class="succ-err-msg-img">
-                <div id="msg">Please upload all images</div>
-            </div>
-        </div>
-    @endif
-
     <div class="nk-content main-outer-container">
         <div class="container-fluid">
             <div class="nk-content-inner">
@@ -72,15 +62,6 @@
                                                 </h3>
                                             </div>
                                         </div>
-
-                                        <a href="{{ route('create.page', ['id' => 6]) }}" class="top-btn-holder d-block">
-                                            <svg class="back-btn" viewBox="0 0 24 24" aria-hidden="true">
-                                                <path
-                                                    d="M19 11H7.83l4.882-4.882a1 1 0 000-1.413h-.005a1 1 0 00-1.408 0L4.705 11.3a1 1 0 000 1.41L11.3 19.3a1 1 0 001.41 0 1 1 0 000-1.41L7.83 13H19a1 1 0 001-1 1 1 0 00-1-1z">
-                                                </path>
-                                            </svg>
-                                        </a>
-
                                         <form method="POST" action="{{ route('create.page', ['id' => 8]) }}" class="form"
                                             id="form" enctype="multipart/form-data">
                                             @csrf

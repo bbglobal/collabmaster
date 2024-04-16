@@ -29,14 +29,13 @@
                     <div class="nk-content-wrap">
 
                         <div class="nk-block nk-block-middle nk-auth-body wide-xs pt-0">
+                            <div class="progress progress-lg">
+                                <div class="progress-bar" id="progressBar" data-progress="25">25%</div>
+                            </div>
 
                             <div id="s-7">
                                 <div class="card">
                                     <div class="card-inner card-inner p-0">
-                                        <div class="top-btn-holder">
-                                            {{-- <div class="example-profile-btn">View Example Campaign</div> --}}
-                                            <div class="step-holder">7/7</div>
-                                        </div>
                                         <div class="nk-block-head my-5">
                                             <div class="nk-block-head-content">
                                                 <h3 class="nk-block-title"><b>What’s your annual budget for working with
@@ -44,15 +43,15 @@
                                                 </h3>
                                             </div>
                                         </div>
-                                        <a href="{{ route('register.brand', ['id' => 6]) }}" class="top-btn-holder d-block">
-                                            <svg class="back-btn" viewBox="0 0 24 24" aria-hidden="true">
+                                        <div class="top-btn-holder">
+                                            <svg class="back-btn" onclick="" viewBox="0 0 24 24" aria-hidden="true">
                                                 <path
                                                     d="M19 11H7.83l4.882-4.882a1 1 0 000-1.413h-.005a1 1 0 00-1.408 0L4.705 11.3a1 1 0 000 1.41L11.3 19.3a1 1 0 001.41 0 1 1 0 000-1.41L7.83 13H19a1 1 0 001-1 1 1 0 00-1-1z">
                                                 </path>
                                             </svg>
-                                        </a>
-                                        <form method="POST"
-                                            action="{{ route('submit.brand', ['id' => Auth::user()->id]) }}" id="form">
+                                        </div>
+                                        <form method="POST" action="{{ route('submit.brand', ['id' => Auth::user()->id]) }}"
+                                            id="form">
                                             @csrf
                                             <div class="form-group mb-3 s-1">
                                                 <div class="custom-control custom-radio">

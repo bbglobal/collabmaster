@@ -65,7 +65,7 @@
                                     </form>
 
                                     <div class="login-forgot forgot w-100 text-center my-4">
-                                        <span class="text-dark no-verify-email">I didn't receive an email</span>.
+                                        <a href="#" class="text-dark">I didn't receive an email</a>.
                                     </div>
                                 </div>
                             </div>
@@ -76,48 +76,6 @@
             </div>
         </div>
     </div>
-    <script>
-        $('.no-verify-email').click(function() {
-            showModal(`
-<link rel='stylesheet' type='text/css' href="/static/igmarketplace/profile/walkthrough.css?v=3.67">
-
-<div class="slide" style="display: block">
-    <div class="modal-content-header">
-        <div class="modal-content-header-title">Can't Find the Email?</div>
-        <div class="close-modal"><img class="close-modal-img" src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/closeModal.svg"></div>
-    </div>
-
-    <div class="modal-content-scroll">
-        <div class="steps-holder">
-            <div class="step-holder">
-                <div class="step-info-holder">
-                    <div class="step-title">1. Check All of Your Folders</div>
-                    <div class="step-txt">Sometimes emails end up in spam or folders other than your inbox. Be sure to check all of your folders for the verification email.</div>
-                </div>
-            </div>
-
-            <div class="step-holder">
-                <div class="step-info-holder">
-                    <div class="step-title">2. Search for Emails From hello@collabstr.com</div>
-                    <div class="step-txt">Search your inbox for emails from hello@collabstr.com.</div>
-                </div>
-            </div>
-
-            <div class="step-holder">
-                <div class="step-info-holder">
-                    <div class="step-title">3. Resend Email</div>
-                    <div class="step-txt">If you still can't find the email, try resending it using the button below. If you still are having issues, <a style="color: #222;" href="/support">Contact Us</a>.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-content-footer">
-        <button class='btn modal-btn resend-btn'>Resend Email</button>
-    </div>
-</div>`);
-        });
-    </script>
     <!-- content @e -->
 
     <script>
@@ -131,7 +89,7 @@
 
                 $(this).attr('action', $(this).attr('action') + '/verify/' + encodeURIComponent(
                     verificationCodeValue));
-
+                
                 this.submit();
             });
         });

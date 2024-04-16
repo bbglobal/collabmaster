@@ -13,7 +13,7 @@
           <h4 class="card-title">Invoice</h4>
           <br>
           {{-- <p class="text-muted mb-3">Read the <a href="https://jqueryvalidation.org/" target="_blank"> Official jQuery Validation Documentation </a>for a full list of instructions and other options.</p> --}}
-          
+
             <div class="mb-3">
               <label for="name" class="form-label">Full Name: @if(!empty($order)) {{$order->full_name}} @endif</label>
             </div>
@@ -35,14 +35,14 @@
               </div>
 
               <div class="mb-3">
-                <label for="name" class="form-label">Delivery Status: @if(!empty($order)) {{$order->status}} @endif</label>
+                <label for="name" class="form-label">Payment Status: @if(!empty($order)) {{$order->payment_status}} @endif</label>
               </div>
-             
+
           </form>
         </div>
       </div>
     </div>
-    
+
   </div>
 @endsection
 

@@ -23,7 +23,7 @@
 
     <div class="row">
 
-        
+
         <div class="col-md-12 grid-margin stretch-card">
 
             <div class="card">
@@ -40,8 +40,7 @@
                                     <th>Description</th>
                                     <th>Package Content Type</th>
                                     <th>Price</th>
-                                    <th>Delivery Status</th>
-                                    <th>Conformation Status</th>
+                                    <th>Payment Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -54,15 +53,22 @@
                                         <td>{{ $order->description }}</td>
                                         <td>{{ $order->package_content_type }}</td>
                                         <td>{{ $order->price }}</td>
-                                        <td>{{ $order->status }}</td>
                                         <td>
-                                            @if($order->conformation_status == 'Accepted')
+                                            @if($order->payment_status == 'Completed')
                                             <span class="text-success">
                                                 Accepted
                                             </span>
-                                            @elseif($order->conformation_status == 'Decline')
+                                            @elseif($order->payment_status == 'Decline')
                                             <span class="text-danger">
                                                 Decline
+                                            </span>
+                                            @elseif($order->payment_status == 'Pending')
+                                            <span class="text-warning">
+                                                Pending
+                                            </span>
+                                            @elseif($order->payment_status == 'Approved')
+                                            <span class="text-info">
+                                                Approved
                                             </span>
                                             @endif
                                          </td>

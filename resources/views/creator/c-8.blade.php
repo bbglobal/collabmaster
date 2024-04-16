@@ -158,15 +158,6 @@
                                                         calculator.</a> Collabstr takes a 15% fee.</p>
                                             </div>
                                         </div>
-
-                                        <a href="{{ route('create.page', ['id' => 7]) }}" class="top-btn-holder d-block">
-                                            <svg class="back-btn" viewBox="0 0 24 24" aria-hidden="true">
-                                                <path
-                                                    d="M19 11H7.83l4.882-4.882a1 1 0 000-1.413h-.005a1 1 0 00-1.408 0L4.705 11.3a1 1 0 000 1.41L11.3 19.3a1 1 0 001.41 0 1 1 0 000-1.41L7.83 13H19a1 1 0 001-1 1 1 0 00-1-1z">
-                                                </path>
-                                            </svg>
-                                        </a>
-
                                         <form method="POST" action="{{ route('create.page', ['id' => 9]) }}" class="form"
                                             id="form">
                                             @csrf

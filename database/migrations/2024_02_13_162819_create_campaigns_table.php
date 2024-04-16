@@ -49,11 +49,9 @@ return new class extends Migration
             $table->string("content_4")->nullable();
             $table->string("files")->nullable();
             $table->string("file_list_objs")->nullable();
-            $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")
-                ->references("id")
-                ->on('users')
-                ->onDelete('cascade');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

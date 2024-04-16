@@ -49,7 +49,7 @@
                     <li class="footer-link-li"><a class="text-gray" href="{{ route('hire.influencer') }}">Hire
                             Influencers </a>
                     </li>
-                    <li class="footer-link-li"><a class="text-gray" href="{{ route('influencer.search') }}">Search
+                    <li class="footer-link-li"><a class="text-gray" href="{{ route('search.influencer') }}">Search
                             Influencers
                         </a></li>
                     <li class="footer-link-li"><a class="text-gray" href="{{ route('marketplace') }}">Influencer
@@ -97,6 +97,9 @@
     </div>
 </div>
 
+
+
+
 <!-- footer @e -->
 </div>
 <!-- wrap @e -->
@@ -131,6 +134,9 @@
 <!-- Custom JS File -->
 <script src="{{ 'assets/js/ajax.js' }}"></script>
 <script src="{{ 'assets/bundles/sweetalert/sweetalert.min.js' }}"></script>
+
+<!-- Scripts -->
+<script src="https://collabmaster.com/public/assets/js/app.js"></script>
 
 <div class="modal fade" tabindex="-1" id="sign_up_form_modal">
     <div class="modal-dialog modal-lg" role="document">

@@ -42,14 +42,6 @@
             background-color: var(--collabstrDark);
             background: var(--gradientText);
         }
-
-        .msg-btn-holder a {
-            color: #000;
-        }
-
-        .msg-btn-holder a:hover {
-            text-decoration: underline;
-        }
     </style>
 @endpush
 
@@ -126,7 +118,7 @@
 
                                     <div class="profile-holder">
                                         <img loading="lazy" class="profile-pic"
-                                            src="{{ url('assets/images/' . $creator->file_path) }}" alt="image">
+                                            src="{{ url('assets/images/' . $creator->file_path) }}" alt="Photo of Dalena">
                                         <div class="profile-info-holder">
                                             <h1 class="listing-title">{{ $creator->full_name }} | {{ $creator->bio }}</h1>
                                             <div class="profile-name-location">
@@ -252,7 +244,10 @@
                                                                         {{ $package->package_description_ }}
                                                                         <span class="see-more-package">See More</span>
                                                                     </div>
-                                                                    <div style="display: none" class="package-desc-full">{{ $package->package_description_ }}</div>
+                                                                    <div style="display: none" class="package-desc-full">This
+                                                                        offer includes one Instagram story post which will be
+                                                                        advertised to my audience. The Instagram story views
+                                                                        average around 2000-6000 views per upload.</div>
                                                                     <div class="package-btm-row">
                                                                         <div
                                                                             class="package-img-holder package-img-holder-instagram">
@@ -260,15 +255,8 @@
                                                                                 src="{{ url('assets/websiteImages/creatorMarketplace/instagram.svg') }}"
                                                                                 alt="Instagram logo" loading="lazy">
                                                                         </div>
-                                                                        @guest
-                                                                            <a href="{{ route('brand.checkout', ['id' => $package->id]) }}"
-                                                                                class="buy-btn btn">Continue</a>
-                                                                        @else
-                                                                            @if (Auth::user()->role == 'brand')
-                                                                                <a href="{{ route('brand.checkout', ['id' => $package->id]) }}"
-                                                                                    class="buy-btn btn">Continue</a>
-                                                                            @endif
-                                                                        @endguest
+                                                                        <a href="{{ route('brand.checkout', ['id' => $package->id]) }}"
+                                                                            class="buy-btn btn">Continue</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -277,14 +265,13 @@
                                                     </div>
 
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div><!-- .card-preview -->
 
                                     <div class="msg-btn-holder">Have a different request?
-                                        <a href="{{ route('offer.create', ['id' => $creator->user_id]) }}"
-                                            class="msg-btn">Send a
-                                            Custom Offer</a>
+                                        <span class="msg-btn">Send a Custom Offer</span>
                                     </div>
 
 

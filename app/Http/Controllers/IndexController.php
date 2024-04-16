@@ -3,18 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Mail\NewUserNotification;
-use App\Mail\TestEamil;
-use App\Models\Brand;
 use App\Models\campaign;
-use App\Models\Creator;
-use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Package;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
 use Throwable;
 use Validator;
@@ -89,55 +83,31 @@ class IndexController extends Controller
         return view("influencers", $data);
     }
 
-    public function explore(Request $request)
+    public function explore($id)
     {
-        $platform = $request->input('p');
-        $category = $request->input('c');
-        $contentType = $request->input('t');
-        $country = $request->input('ct');
-        $city = $request->input('ct');
-        $price = $request->input('l');
-        $gender = $request->input('g');
-        $minPrice = $request->input('pmi');
-        $maxPrice = $request->input('pmx');
-        $minFollowers = $request->input('fmi');
-        $maxFollowers = $request->input('fmx');
+        if ($id === 'search') {
+            $platform = request('platform');
+            $category = request('category');
 
-        // $query = Creator::join('packages', 'creators.user_id', '=', 'packages.user_id')
-        //                 ->select('creators.*', 'packages.*');
+            $creators = User::join('creators', 'users.id', '=', 'creators.user_id')
+                ->join('packages', function ($join) {
+                    $join->on('users.id', '=', 'packages.user_id')
+                        ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
+                })
+                ->select('users.*', 'creators.*', 'packages.package_price_')
+                ->where('platform', $platform)
+                ->where(function ($query) use ($category) {
+                    if ($category) {
+                        $query->where('category', 'LIKE', '%' . $category . '%');
+                    }
+                })
+                ->get();
 
-        $query = Creator::query();
-        $packageQuery = Package::query();
-
-        // dd($packageQuery);
-
-        if ($platform) {
-            $query->where('platform', $platform);
+            $data = compact('creators');
+            return view('influencers', $data);
+        } else {
+            // Handle other cases here if needed
         }
-        if ($category) {
-            $query->where('categories', 'like', "%$category%");
-        }
-        if ($contentType) {
-            $packageQuery->where('package_content_type_', 'like', "%$contentType%");
-        }
-        if ($minFollowers && $maxFollowers) {
-            $query->where('instagram_followers', [$minFollowers, $maxFollowers]);
-        }
-        if ($country) {
-            $query->where('location', 'like', "%$country%");
-        }
-        if ($minPrice && $maxPrice) {
-            $packageQuery->whereBetween('package_price_', [$minPrice, $maxPrice]);
-        }
-        if ($gender) {
-            $query->where('genderOption', $gender);
-        }
-
-        $creators = $query->get()->union($packageQuery->get());
-
-        // dd($creators);
-
-        return view('influencers', compact('creators'));
     }
 
     public function influencerDetails($id)
@@ -183,27 +153,7 @@ class IndexController extends Controller
 
     public function marketplace()
     {
-        $creators = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(4)
-            ->get();
-
-        $explore = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(20)
-            ->get();
-
-        $data = compact('creators', 'explore');
-
-        return view("influencer-marketplace")->with($data);
+        return view("influencer-marketplace");
     }
     public function blogs()
     {
@@ -212,10 +162,6 @@ class IndexController extends Controller
     public function hub()
     {
         return view("creator-hub");
-    }
-    public function caseStudy()
-    {
-        return view("case-study");
     }
     public function program()
     {
@@ -251,51 +197,11 @@ class IndexController extends Controller
     }
     public function findInfluencer()
     {
-        $creators = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(4)
-            ->get();
-
-        $explore = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(20)
-            ->get();
-
-        $data = compact('creators', 'explore');
-
-        return view("find-influencer")->with($data);
+        return view("find-influencer");
     }
     public function topInfluencer()
     {
-        $creators = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(4)
-            ->get();
-
-        $explore = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(20)
-            ->get();
-
-        $data = compact('creators', 'explore');
-
-        return view("top-influencer")->with($data);
+        return view("top-influencer");
     }
     public function hireInfluencer()
     {
@@ -303,27 +209,7 @@ class IndexController extends Controller
     }
     public function searchInfluencers()
     {
-        $creators = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(4)
-            ->get();
-
-        $explore = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(20)
-            ->get();
-
-        $data = compact('creators', 'explore');
-
-        return view("search-influencer")->with($data);
+        return view("search-influencer");
     }
     public function buyContent()
     {
@@ -363,16 +249,16 @@ class IndexController extends Controller
 
     public function orders()
     {
-        $orders = Order::where('creator_id', Auth::user()->id)->get();
-        $offers = Offer::where('creator_id', Auth::user()->id)->get();
-
-        return view("orders", compact('orders', 'offers'));
-    }
-
-    public function chat($id)
-    {
-
-        return view("chat");
+        $user = auth()->user();
+        if ($user->role === 'brand') {
+            $orders = Order::where('brand_id', $user->id)->get();
+        } elseif ($user->role === 'creator') {
+            $orders = Order::where('creator_id', $user->id)->get();
+        } else {
+            $orders = Order::all();
+        }
+        // dd($orders);
+        return view("orders", compact('orders'));
     }
 
     public function lists()
@@ -382,32 +268,13 @@ class IndexController extends Controller
 
     public function checkout($id)
     {
-        if (is_null(Auth::user())) return redirect()->route('user.login');
-
         $package = Package::join('creators', 'packages.user_id', '=', 'creators.user_id')
-            ->join('users', 'users.id', '=', 'creators.user_id')
             ->where('packages.id', $id)
-            ->select('packages.*', 'creators.*', 'users.name')
+            ->select('packages.*', 'creators.*')
             ->first();
 
         $data = compact('package');
         return view("checkout")->with($data);
-    }
-
-    public function createOffer($id)
-    {
-        if (is_null(Auth::user())) return redirect()->route('user.login');
-
-        $user = Package::join('users', 'packages.user_id', '=', 'users.id')
-            ->where('packages.user_id', $id)
-            ->select('packages.package_price_', 'users.*')
-            ->first();
-
-        $averagePrice = Package::where('user_id', $id)
-            ->avg('package_price_');
-
-        $data = compact('user', 'averagePrice');
-        return view("create-offer")->with($data);
     }
 
     public function campaigns()
@@ -425,51 +292,13 @@ class IndexController extends Controller
         return view("account");
     }
 
-    public function profile($id)
+    public function profile()
     {
+        $user = User::findOrFail(Auth::id());
+        $campaign = campaign::where('user_id', Auth::id())->get();
 
-        if (Auth::user()->role == "brand") {
-
-            $user = User::findOrFail(Auth::id());
-            $campaigns = campaign::where('user_id', Auth::id())->get();
-            $data = compact('campaigns', 'user');
-
-            return view('brand-profile')->with($data);
-        }
-
-        $creator = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->where('creators.id', $id)
-            ->select('users.*', 'creators.*')
-            ->first();
-
-        $packages = Package::where('user_id', $creator->user_id)->get();
-
-        $data = compact("creator", "packages");
-
+        $data = compact('campaign', 'user');
         return view('profile')->with($data);
-    }
-
-    public function editProfile($id)
-    {
-        if (Auth::user()->role == "brand") {
-
-            $brand = Brand::where('user_id', $id)->first();
-
-            $data = compact("brand");
-            return view('edit-brand')->with($data);
-        } else {
-            $creator = User::join('creators', 'users.id', '=', 'creators.user_id')
-                ->where('creators.id', $id)
-                ->select('users.*', 'creators.*')
-                ->first();
-
-            $packages = Package::where('user_id', $creator->user_id)->get();
-
-            $data = compact("creator", "packages");
-
-            // $data = compact('campaign', 'user');
-            return view('edit-profile')->with($data);
-        }
     }
 
     public function getStarted()
@@ -477,7 +306,7 @@ class IndexController extends Controller
         return view("get-started");
     }
 
-    function logout()
+    public function logout()
     {
         Auth::logout();
 
@@ -486,22 +315,12 @@ class IndexController extends Controller
 
     public function joinAsCreator()
     {
-        $creators = User::join('creators', 'users.id', '=', 'creators.user_id')
-            ->join('packages', function ($join) {
-                $join->on('users.id', '=', 'packages.user_id')
-                    ->whereRaw('packages.id = (SELECT id FROM packages WHERE user_id = users.id LIMIT 1)');
-            })
-            ->select('users.*', 'creators.*', 'packages.package_price_')
-            ->limit(4)
-            ->get();
-
-        $data = compact('creators');
-        return view("join-as-creator")->with($data);
+        return view("join-as-creator");
     }
 
     public function cratorSingup($username)
     {
-        session()->put('name', $username);
+        session()->put('username', $username);
         return view("creator-signup");
     }
 
@@ -662,7 +481,7 @@ class IndexController extends Controller
     {
         $controlls = $req->all();
         $rules = array(
-            "conformation_status" => "required"
+            "payment_status" => "required",
         );
 
         $validator = Validator::make($controlls, $rules);
@@ -670,13 +489,12 @@ class IndexController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($controlls);
         } else {
             $status = Order::find($req->id);
-            $status->conformation_status = $req->conformation_status;
+            $status->payment_status = $req->payment_status;
             $status->save();
 
             return redirect()->back()->withSuccess("Conformation Status Successfully Changed");
         }
     }
-
 
     public function create_payment_order(Request $request)
     {
@@ -696,13 +514,5 @@ class IndexController extends Controller
                 'message' => $th->getMessage(),
             ]);
         }
-    }
-
-    public function testEvent()
-    {
-        $user = User::find(1);
-        $adminEmail = 'team.collabmaster@gmail.com';
-        Mail::to($adminEmail)->send(new NewUserNotification($user));
-        return redirect()->back()->with('success', 'Test Email sent Successfully');
     }
 }

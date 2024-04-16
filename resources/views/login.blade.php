@@ -19,33 +19,6 @@
 @section('main-section')
     <!-- content @s
         -->
-
-        @if ($message = session('decline'))
-            <div id="msg-holder">
-                <div id="msg-holder-row">
-                    <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/err.svg"
-                        class="succ-err-msg-img" id="msg-img-err">
-                    <div id="msg">{{ $message }}</div>
-                </div>
-            </div>
-        @elseif ($message = session('error'))
-            <div id="msg-holder">
-                <div id="msg-holder-row">
-                    <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/err.svg"
-                        class="succ-err-msg-img" id="msg-img-err">
-                    <div id="msg">{{ $message }}</div>
-                </div>
-            </div>
-        @elseif ($message = session('status'))
-            <div id="msg-holder">
-                <div id="msg-holder-row">
-                    <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/succ.svg"
-                        class="succ-err-msg-img" id="msg-img-err">
-                    <div id="msg">{{ $message }}</div>
-                </div>
-            </div>
-        @endif
-
         <div class="nk-content " style="width: 92%;margin: 0 auto;margin-top: 40px;">
             <div class="container-fluid">
                 <div class="nk-content-inner">
@@ -94,11 +67,14 @@
                                         <div class="seperator"><span>or</span></div>
                                         <form method="POST" action="{{ route('login') }}" id="form">
                                             @csrf
+                                            @if (session('success'))
+                                                <div class="alert alert-danger">{{ session('success') }}</div>
+                                            @endif
                                             <div class="form-group mb-5">
                                                 <input id="email" type="email"
                                                     class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                                    name="email" value="{{ old('email') }}" autofocus=""
-                                                    placeholder="Email" required="">
+                                                    name="email" value="" autofocus="" placeholder="Email"
+                                                    required="">
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -135,8 +111,7 @@
                                                 </button>
                                             </div>
                                         </form>
-                                        <a href="{{ route('password.request') }}"
-                                            class="login-forgot forgot w-100 text-center my-4 d-block">Forgot password?</a>
+                                        <div class="login-forgot forgot w-100 text-center my-4">Forgot password?</div>
                                     </div>
                                 </div>
                             </div>

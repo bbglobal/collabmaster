@@ -53,7 +53,7 @@ class OrderController extends Controller
             "description" => "required",
             "package_content_type" => "required",
             "price" => "required",
-            "status" => "required"
+            "payment_status" => "required"
 
 
         );
@@ -68,7 +68,7 @@ class OrderController extends Controller
             $status->description = $req->description;
             $status->package_content_type = $req->package_content_type;
             $status->price = $req->price;
-            $status->status = $req->status;
+            $status->payment_status = $req->payment_status;
 
             $status->save();
 

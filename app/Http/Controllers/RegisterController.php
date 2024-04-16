@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Admin;
 use App\Http\Controllers\Controller;
-use App\Mail\NewUserNotification;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\VerificationEmail;
 use App\Models\Brand;
 use App\Models\Campaign;
 use App\Models\Creator;
-use App\Models\Offer;
 use App\Models\Package;
-use App\Models\User;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 
@@ -51,16 +44,13 @@ class RegisterController extends Controller
 
         Mail::to($user->email)->send(new VerificationEmail($user));
 
-        $adminEmail = 'team.collabmaster@gmail.com';
-        Mail::to($adminEmail)->send(new NewUserNotification($user));
-
         return redirect("/verify-email")->with("success", "Your Account Registered Successfully");
     }
 
     public function creatorSingup(Request $request, $username)
     {
         $request->validate([
-            'name' => 'required|unique:users'
+            'username' => 'required|unique:users'
         ]);
 
         session()->put('creator_username', $username);
@@ -70,6 +60,7 @@ class RegisterController extends Controller
 
     public function creatorRegister(Request $request)
     {
+
         $request->validate([
             'full_name' => 'required',
             'email' => 'required|unique:users',
@@ -92,9 +83,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         Mail::to($user->email)->send(new VerificationEmail($user));
-
-        $adminEmail = 'team.collabmaster@gmail.com';
-        Mail::to($adminEmail)->send(new NewUserNotification($user));
 
         return redirect("/verify-your-email")->with("success", "Your Account Registered Successfully");
     }
@@ -244,15 +232,6 @@ class RegisterController extends Controller
                 return view('creator.c-7');
                 break;
             case '8':
-
-                $request->validate([
-                    'img' => 'required',
-                    'img1' => 'required',
-                    'img2' => 'required',
-                    'img3' => 'required',
-                    'img4' => 'required',
-                ]);
-
                 $img = $request->file('img')->getClientOriginalName();
                 $request->file('img')->move('assets/images', $img);
                 $request->session()->put('file_path', $img);
@@ -484,44 +463,9 @@ class RegisterController extends Controller
                 return view('campaign.c-8');
                 break;
             case '9':
-
-
-                // dd($request->all());
-
-                $request->validate([
-                    'img_files' => 'required',
-                    'img1' => 'required',
-                    'img2' => 'required',
-                    'img3' => 'required',
-                    'img4' => 'required',
-                ]);
-
                 $img = $request->file('img_files')->getClientOriginalName();
                 $request->file('img_files')->move('assets/images', $img);
                 $request->session()->put('file_path', 'assets/images/' . $img);
-
-                $imgOne = $request->file('img1')->getClientOriginalName();
-                $request->file('img1')->move('assets/images', $imgOne);
-                $request->session()->put('img_1', $imgOne);
-
-                if ($request->hasFile('img2')) {
-                    $imgTwo = $request->file('img2')->getClientOriginalName();
-                    $request->file('img2')->move('assets/images', $imgTwo);
-                    $request->session()->put('img_2', $imgTwo);
-                }
-
-                if ($request->hasFile('img3')) {
-                    $imgThree = $request->file('img3')->getClientOriginalName();
-                    $request->file('img3')->move('assets/images', $imgThree);
-                    $request->session()->put('img_3', $imgThree);
-                }
-
-                if ($request->hasFile('img4')) {
-                    $imgFour = $request->file('img4')->getClientOriginalName();
-                    $request->file('img4')->move('assets/images', $imgFour);
-                    $request->session()->put('img_4', $imgFour);
-                }
-
                 return view('campaign.c-9');
                 break;
             case '10':
@@ -540,12 +484,6 @@ class RegisterController extends Controller
         $request->file('files')->move('assets/images', $img);
         $request->session()->put('files', 'assets/images/' . $img);
 
-        $formData['file_path'] = $request->session()->get('file_path', '');
-        $formDataOne['img_1'] = $request->session()->get('img_1', '');
-        $formDataTwo['img_2'] = $request->session()->get('img_2', '');
-        $formDataThree['img_3'] = $request->session()->get('img_3', '');
-        $formDataFour['img_4'] = $request->session()->get('img_4', '');
-
         $user = Auth::user();
 
         $formData = array_merge(
@@ -556,11 +494,7 @@ class RegisterController extends Controller
             $request->session()->get('c_5', []),
             $request->session()->get('c_6', []),
             $request->session()->get('c_7', []),
-            $formData,
-            $formDataOne,
-            $formDataTwo,
-            $formDataThree,
-            $formDataFour,
+            $request->session()->get('c_8', []),
             $request->session()->get('c_9', []),
             $request->session()->get('c_10', []),
         );
@@ -569,14 +503,14 @@ class RegisterController extends Controller
 
         $formData['user_id'] = $user->id;
 
-        dd($formData);
+        // dd($formData);
         Campaign::create($formData);
 
-        $request->session()->forget(['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7', 'file_path', 'img_1', 'img_2', 'img_3', 'img_4', 'c_9', 'c_10']);
+        $request->session()->forget(['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7', 'c_8', 'c_9', 'c_10']);
 
         $campaign = Campaign::all();
         $data = compact('campaign');
-        return redirect('profile/' . Auth::user()->id)->with($data);
+        return view('profile')->with($data);
     }
 
     function login(Request $request)
@@ -586,17 +520,12 @@ class RegisterController extends Controller
             'password' => 'required',
         ]);
 
-        $email = $request->email;
-        $password = $request->password;
+        // $credentials = $request->only('email', 'password','Active');
+        $credientials = ['email' => $request->email, 'password' => $request->password, 'status' => 'Active'];
 
-        $credentials = ['email' => $email, 'password' => $password];
-        if (!Auth::attempt($credentials)) {
-            return redirect()->route('login')->with(['error' => 'Invalid credentials. Please try again.']);
-        }
-        $user = Auth::user();
-        if ($user->status !== 'Active') {
-            Auth::logout();
-            return redirect()->route('login')->with(['decline' => 'Wait For Admin Approval']);
+        if (!Auth::attempt($credientials)) {
+            // return redirect()->route('admin.login')->withErrors(['error' => "Invalid Credientials"]);
+            return redirect()->route('login')->with(['success' => 'Wait For Admin Approval']);
         } else {
             $user = Auth::user();
 
@@ -608,53 +537,6 @@ class RegisterController extends Controller
         }
 
         return redirect()->route('login')->with(['success', 'Wait For Admin Approval']);
-    }
-
-    function createOffer(Request $request, $id)
-    {
-        $request->validate([
-            'creator_id' => 'required',
-            'brand_id' => 'required',
-
-            'package_category' => 'required',
-            'package_title' => 'required|max:60',
-            'package_description' => 'required|min:60',
-            'package_price' => 'required',
-        ]);
-
-        $offer = new Offer();
-        $offer->creator_id = $request->input('creator_id');
-        $offer->package_category = $request->input('package_category');
-        $offer->package_title = $request->input('package_title');
-        $offer->package_description = $request->input('package_description');
-        $offer->package_price = $request->input('package_price');
-        $offer->website = $request->input('website');
-        $offer->instagram_username = $request->input('instagram_username');
-        $offer->tiktok_username = $request->input('tiktok_username');
-        $offer->youtube_username = $request->input('youtube_username');
-        $offer->twitter_username = $request->input('twitter_username');
-        $offer->brand_id = $request->input('brand_id');
-        $offer->save();
-
-        return redirect()->back()->with('success', 'Offer submitted');
-    }
-
-    function editProfile(Request $request, $id)
-    {
-        $request->validate([
-            'location' => 'required',
-            'description' => 'required',
-        ]);
-
-        dd($request->all());
-        die;
-
-        $edit = Brand::where('user_id', $id)->first();
-        $edit->location = $request->input('location');
-        $edit->description = $request->input('description');
-        $edit->update();
-
-        return redirect()->back()->with('success', 'profile updated');
     }
 
     public function redirectToGoogle()
@@ -676,7 +558,7 @@ class RegisterController extends Controller
 
         if (!$user) {
             $user = new User();
-            $user->name = $data->name;
+            $user->username = $data->name;
             $user->full_name = $data->name;
             $user->email = $data->email;
             $user->provider_id = $data->id;
@@ -689,54 +571,5 @@ class RegisterController extends Controller
         }
 
         Auth::login($user);
-    }
-
-    public function requestPassword()
-    {
-        return view('forgot-password');
-    }
-
-    public function emailPassword(Request $request)
-    {
-        $request->validate(['email' => 'required|email']);
-
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
-            : back()->with('email', __($status));
-    }
-
-    public function resetPassword(string $token)
-    {
-        return view('reset-password', ['token' => $token]);
-    }
-
-    public function updatePassword(Request $request)
-    {
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:6|confirmed',
-        ]);
-
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user, string $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
-
-                $user->save();
-
-                event(new PasswordReset($user));
-            }
-        );
-
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('user.login')->with('status', __($status))
-            : back()->with('email', __($status));
     }
 }
