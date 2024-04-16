@@ -1,10 +1,4 @@
-﻿﻿@extends('layouts.main')
-
-@push('footer-style')
-    <link rel="stylesheet" href="{{ url('assets/css/search.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/moreFilters.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/modal.css') }}">
-@endpush
+﻿@extends('layouts.main')
 
 @section('main-section')
 
@@ -26,246 +20,86 @@
                                     </div>
                                 </div>
 
-                                <form class="search-form-holder" method="get" action="{{ route('search.Influencer') }}">
-                                    <div class="search-holder">
-                                        <div class="filter-section platform-filter-section">
-                                            <div class="filter-title">Platform</div>
-                                            <div class="js-filter-placeholder filter-placeholder"
-                                            >Choose a platform</div>
-                                            <div class="filter-dropdown-holder platform-dropdown-holder">
-                                                <div class="filter-dropdown-option" data-id="">Any</div>
-
-                                                <div class="filter-dropdown-option" data-id="instagram">Instagram</div>
-
-                                                <div class="filter-dropdown-option" data-id="tiktok">TikTok</div>
-
-                                                <div class="filter-dropdown-option" data-id="user generated content">User
-                                                    Generated Content</div>
-
-                                                <div class="filter-dropdown-option" data-id="youtube">YouTube</div>
-
-                                            </div>
-
-                                            <select class="mobile-select-dropdown">
-                                                <option value="">All</option>
-
-                                                <option value="instagram">Instagram</option>
-
-                                                <option value="tiktok">TikTok</option>
-
-                                                <option value="user generated content">User Generated Content</option>
-
-                                                <option value="youtube">YouTube</option>
-
-                                            </select>
-
-                                            <input type="hidden" name="p" value="">
-                                        </div>
-
-                                        <div class="filter-seperator"></div>
-
-                                        <div class="filter-section category-filter-section">
-                                            <div class="clear-input-btn"><img class="clear-input-img"
-                                                    src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/closeModal.svg">
-                                            </div>
-                                            <div class="filter-title">Category</div>
-                                            <div class="filter-placeholder"><input class="filter-search-input" name="c"
-                                                    type="text" placeholder="Enter keywords, niches or categories"
-                                                    value=""></div>
-                                            <div class="filter-dropdown-holder category-dropdown-holder">
-                                                <div class="filter-search-input-suggestion-area">
-                                                    <div class="filter-search-input-suggestion-title">Suggested</div>
-                                                    <div class="filter-search-input-suggestion-holder"></div>
-                                                </div>
-                                                <div>
-                                                    <div class="filter-search-input-pop-title">Popular</div>
-                                                    <div class="filter-search-input-pop-holder">
-
-                                                        <div class="filter-search-input-pop-option" data-id="Lifestyle">
-                                                            Lifestyle</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Fashion">Fashion
+                                <form method="GET" action="{{ route('search.Influencer', ['id' => 'search']) }}"
+                                    class="pos-rel" id="searchForm">
+                                    <div class="card card-style m-0 card-style-mb">
+                                        <div class="card-inner light-box-shadow p-0 border-radius-6 pos-rel">
+                                            <span class="pos-abs span-divider"></span>
+                                            <div class="row p-0 m-0 border-radius-6">
+                                                <div class="col-md-6 border-radius-6 p-0">
+                                                    <div class="form-group border-radius-6">
+                                                        <div class="form-control-wrap position-relative h-60">
+                                                            <label
+                                                                class="form-label pos-abs search-input-label m-0"><b>Plateform</b></label>
+                                                            <input type="text"
+                                                                class="dropdown-input form-control border-0 padding-2 border-radius-6 h-60"
+                                                                placeholder="Choose a plateform">
+                                                            <ul class="dropdown-list light-box-shadow">
+                                                                <li>Any</li>
+                                                                <li>Instagram</li>
+                                                                <li>Tiktok</li>
+                                                                <li>User Generated Content</li>
+                                                                <li>YouTube</li>
+                                                            </ul>
                                                         </div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Beauty">Beauty
-                                                        </div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Travel">Travel
-                                                        </div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Health &amp; Fitness">Health &amp; Fitness</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Food &amp; Drink">
-                                                            Food &amp; Drink</div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Comedy &amp; Entertainment">Comedy &amp; Entertainment
-                                                        </div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Model">Model</div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Family &amp; Children">Family &amp; Children</div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Art &amp; Photography">Art &amp; Photography</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Music &amp; Dance">
-                                                            Music &amp; Dance</div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Animals &amp; Pets">Animals &amp; Pets</div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Adventure &amp; Outdoors">Adventure &amp; Outdoors</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Education">
-                                                            Education</div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Entrepreneur &amp; Business">Entrepreneur &amp; Business
-                                                        </div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Athlete &amp; Sports">Athlete &amp; Sports</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="LGBTQ2+">LGBTQ2+
-                                                        </div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Gaming">Gaming
-                                                        </div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Vegan">Vegan</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Technology">
-                                                            Technology</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Actor">Actor
-                                                        </div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Healthcare">
-                                                            Healthcare</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Skilled Trades">
-                                                            Skilled Trades</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Automotive">
-                                                            Automotive</div>
-
-                                                        <div class="filter-search-input-pop-option" data-id="Cannabis">
-                                                            Cannabis
-                                                        </div>
-
-                                                        <div class="filter-search-input-pop-option"
-                                                            data-id="Celebrity &amp; Public Figure">Celebrity &amp; Public
-                                                            Figure</div>
-
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6 border-radius-6 p-0">
+                                                    <div class="form-group border-radius-6">
+                                                        <div class="form-control-wrap position-relative h-60">
+                                                            <label
+                                                                class="form-label pos-abs search-input-label m-0"><b>Category</b></label>
+                                                            <input type="text"
+                                                                class="dropdown-input form-control border-0 padding-2 border-radius-6 h-60"
+                                                                placeholder="Enter keywords, niches or category">
+                                                            <div class="dropdown-list light-box-shadow">
+                                                                <div class="font-90 text-gray-light">
+                                                                    Popular
+                                                                </div>
+                                                                <div class="dropdown-list-2">
+                                                                    <p> Lifestyle</p>
+                                                                    <p> Fashion</p>
+                                                                    <p> Beauty</p>
+                                                                    <p> Travel</p>
+                                                                    <p> Health & Fitness</p>
+                                                                    <p> Comedy & Entertainment</p>
+                                                                    <p> Food & Drink</p>
+                                                                    <p> Model</p>
+                                                                    <p> Art & Photography</p>
+                                                                    <p> Family & Children</p>
+                                                                    <p> Music & Dance</p>
+                                                                    <p> Animals & Pets</p>
+                                                                    <p> Adventure & Outdoors</p>
+                                                                    <p> Education</p>
+                                                                    <p> Entrepreneur & Business</p>
+                                                                    <p> Athlete & Sports</p>
+                                                                    <p> LGBTQ2+</p>
+                                                                    <p> Vegan</p>
+                                                                    <p> Gaming</p>
+                                                                    <p> Technology</p>
+                                                                    <p> Actor</p>
+                                                                    <p> Healthcare</p>
+                                                                    <p> Cannabis</p>
+                                                                    <p> Skilled Trades</p>
+                                                                    <p> Automotive</p>
+                                                                    <p> Celebrity & Public Figure</p>
 
+                                                                </div>
+                                                            </div>
+                                                            <button type="submit" class="btn search-btn-cus m-0 pos-abs"
+                                                                type="button">
+                                                                <em class="rotate-80 icon ni ni-search"></em>
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <button type="submit" class="search-btn">
-                                            <img alt="Search" class="search-img"
-                                                src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/search.svg">
-                                        </button>
-                                    </div>
-
-                                    <div class="modal-filters">
-                                        <div class="modal-content-holder-filters">
-                                            <div class="modal-content-header">
-                                                <div class="modal-content-header-title">Location</div>
-                                                <div class="close-modal-filters"><img class="close-modal-img"
-                                                        src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/closeModal.svg">
-                                                </div>
-                                            </div>
-
-                                            <div class="modal-content-scroll">
-
-                                                <div class="more-filter-holder more-location-holder">
-                                                    <div class="more-filter-title filter-title">City</div>
-
-
-                                                    <link rel="stylesheet" type="text/css"
-                                                        href="/static/igmarketplace/components/locationInput.css?v=3.66">
-
-                                                    <div id="location-dropdown" class="">
-                                                        <input id="location-input" name="l" class="input"
-                                                            type="text"
-                                                            placeholder='City - Enter first 3 letters and select from dropdown'
-                                                            value="">
-                                                        <input id="location-id" name="l_id" type="hidden"
-                                                            value="">
-                                                        <div id="location-dropdown-content"></div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="more-filter-holder more-price-holder">
-                                                    <div class="range-container">
-                                                        <div class="ranges-holder">
-                                                            <div class="range-holder">
-                                                                <div class="range-title">Min Price</div>
-                                                                <div class="range-min-price range-num">$50</div>
-                                                            </div>
-                                                            <div class="range-holder" style="min-width: 117px">
-                                                                <div class="range-title">Max Price</div>
-
-                                                                <div class="range-max-price range-num">$3,000+</div>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="sliders-holder">
-                                                            <input id="fromSlider" type="range" value="50"
-                                                                min="50" step="50" max="3000" />
-                                                            <input id="toSlider" type="range" value="3000"
-                                                                min="50" step="50" max="3000" />
-                                                        </div>
-                                                        <input name="pmi" type="hidden" id="fromInput"
-                                                            value="50" />
-                                                        <input name="pmx" type="hidden" id="toInput"
-                                                            value="3000" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="more-filter-holder more-followers-holder">
-                                                    <div class="range-container">
-                                                        <div class="ranges-holder">
-                                                            <div class="range-holder">
-                                                                <div class="range-title">Min Followers</div>
-                                                                <div class="range-min-followers range-num">0</div>
-                                                            </div>
-                                                            <div class="range-holder" style="min-width: 139px">
-                                                                <div class="range-title">Max Followers</div>
-
-                                                                <div class="range-max-followers range-num">1,000,000+</div>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="sliders-holder">
-                                                            <input id="followersFromSlider" type="range" value="0"
-                                                                min="0" step="1000" max="6000" />
-                                                            <input id="followersToSlider" type="range" value="6000"
-                                                                min="0" step="1000" max="6000" />
-                                                        </div>
-                                                        <input name="fmi" type="hidden" id="followersFromInput"
-                                                            value="0" />
-                                                        <input name="fmx" type="hidden" id="followersToInput"
-                                                            value="1000000" />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="modal-content-footer">
-                                                <button type="button" class='btn modal-btn apply-filter-btn'>Save</button>
-                                            </div>
+                                        <div>
                                         </div>
-                                    </div>
+                                    </div><!-- .card-preview -->
                                 </form>
-
                             </div><!-- .nk-block -->
 
                             <div class="nk-block my-4">
@@ -275,7 +109,7 @@
                                         <div class="d-flex justify-content-between">
                                             <p class="text-gray p-0 m-0 ">Hire top influencers across all
                                                 platforms</p>
-                                            <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                            <span class="text-black"><b>see all</b></span>
                                         </div>
                                     </article>
                                 </div><!-- .nk-block -->
@@ -329,7 +163,7 @@
                                         <h3 class="mb-0 pb-0">Instagram</h3>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-gray p-0 m-0 ">Hire Instagram influencers</p>
-                                            <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                            <span class="text-black"><b>see all</b></span>
                                         </div>
                                     </article>
                                 </div><!-- .nk-block -->
@@ -415,7 +249,7 @@
                                         <h3 class="mb-0 pb-0">Tiktok</h3>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-gray p-0 m-0 ">Hire Instagram influencers</p>
-                                            <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                            <span class="text-black"><b>see all</b></span>
                                         </div>
                                     </article>
                                 </div><!-- .nk-block -->
@@ -471,8 +305,7 @@
                                     </article>
                                 </div><!-- .nk-block -->
                                 <div class="listing-row mb-4">
-                                    <a href="{{ url('influencers/search?c=Travel') }}"
-                                        class="d-block profile-listing-holder custom-col-4 m-0 mb-4"
+                                    <div class="profile-listing-holder custom-col-4 m-0 mb-4"
                                         style="padding: 0 0.5rem !important;">
                                         <div class="card h-100 p-0">
                                             <div class="card-inner p-0">
@@ -484,15 +317,14 @@
                                                             alt="">
                                                         <div class="d-block position-absolute pb-1"
                                                             style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                            <h5 class="text-white pb-2">Travel</h5>
+                                                            <h5 class="text-white pb-2">Label</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                    <a href="{{ url('influencers/search?c=Beauty') }}"
-                                        class="d-block profile-listing-holder custom-col-4 m-0 mb-4"
+                                    </div>
+                                    <div class="profile-listing-holder custom-col-4 m-0 mb-4"
                                         style="padding: 0 0.5rem !important;">
                                         <div class="card h-100 p-0">
                                             <div class="card-inner p-0">
@@ -504,15 +336,14 @@
                                                             alt="">
                                                         <div class="d-block position-absolute pb-1"
                                                             style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                            <h5 class="text-white pb-2">Beauty</h5>
+                                                            <h5 class="text-white pb-2">Label</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                    <a href="{{ url('influencers/search?c=Music%20&%20Dance') }}"
-                                        class="d-block profile-listing-holder custom-col-4 m-0 mb-4"
+                                    </div>
+                                    <div class="profile-listing-holder custom-col-4 m-0 mb-4"
                                         style="padding: 0 0.5rem !important;">
                                         <div class="card h-100 p-0">
                                             <div class="card-inner p-0">
@@ -524,15 +355,14 @@
                                                             alt="">
                                                         <div class="d-block position-absolute pb-1"
                                                             style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                            <h5 class="text-white pb-2">Music &amp; Dance</h5>
+                                                            <h5 class="text-white pb-2">Label</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                    <a href="{{ url('influencers/search?c=Fashion') }}"
-                                        class="d-block profile-listing-holder custom-col-4 m-0 mb-4"
+                                    </div>
+                                    <div class="profile-listing-holder custom-col-4 m-0 mb-4"
                                         style="padding: 0 0.5rem !important;">
                                         <div class="card h-100 p-0">
                                             <div class="card-inner p-0">
@@ -544,13 +374,13 @@
                                                             alt="">
                                                         <div class="d-block position-absolute pb-1"
                                                             style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                            <h5 class="text-white pb-2">Fashion</h5>
+                                                            <h5 class="text-white pb-2">Label</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
                             </div><!-- .nk-block -->
 
@@ -690,7 +520,7 @@
                                                     <div class="position-relative" style="height: 185px; overflow: hidden;">
                                                         <div class="d-block pb-1 px-1"
                                                             style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                            <h4 style="font-size: 1.5rem;"><b><em
+                                                            <h4 style="font-size: 2rem;"><b><em
                                                                         class="icon ni ni-sign-dollar"></em></b>
                                                                 <div class="feature-title p-0 m-0">No Upfront
                                                                     Cost</div>
@@ -712,7 +542,7 @@
                                                     <div class="position-relative" style="height: 220px;">
                                                         <div class="d-block pb-1 px-1"
                                                             style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                            <h4 style="font-size: 1.5rem"><b><em
+                                                            <h4 style="font-size: 2rem;"><b><em
                                                                         class="icon ni ni-list-check"></em></b>
                                                                 <div class="feature-title p-0 m-0">Vetted
                                                                     Influencers</div>
@@ -734,7 +564,7 @@
                                                     <div class="position-relative" style="height: 220px;">
                                                         <div class="d-block pb-1 px-1"
                                                             style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                            <h4 style="font-size: 1.5rem"><b><em
+                                                            <h4 style="font-size: 2rem;"><b><em
                                                                         class="icon ni ni-msg-circle-fill"></em></b>
                                                                 <div class="feature-title p-0 m-0">Instant Chat
                                                                 </div>
@@ -756,7 +586,7 @@
                                                     <div class="position-relative" style="height: 220px;">
                                                         <div class="d-block pb-1 px-1"
                                                             style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                            <h4 style="font-size: 1.5rem"><b><em
+                                                            <h4 style="font-size: 2rem;"><b><em
                                                                         class="icon ni ni-lock-alt-fill"></em></b>
                                                                 <div class="feature-title p-0 m-0">Secure
                                                                     Purchases</div>
@@ -946,7 +776,7 @@
                                     <div class="card h-100 p-0">
                                         <div class="card-inner p-0">
                                             <div class="project">
-                                                <a href="{{ route('case.study') }}">
+                                                <a href="case-study.html">
                                                     <div class="profile-listing-img-holder position-relative"
                                                         style="height: 332px;">
                                                         <img class="profile-listing-img"
@@ -969,7 +799,7 @@
                                     <div class="card h-100 p-0">
                                         <div class="card-inner p-0">
                                             <div class="project">
-                                                <a href="{{ route('case.study') }}">
+                                                <a href="case-study.html">
                                                     <div class="profile-listing-img-holder position-relative"
                                                         style="height: 332px;">
                                                         <img class="profile-listing-img"
@@ -992,7 +822,7 @@
                                     <div class="card h-100 p-0">
                                         <div class="card-inner p-0">
                                             <div class="project">
-                                                <a href="{{ route('case.study') }}">
+                                                <a href="case-study.html">
                                                     <div class="profile-listing-img-holder position-relative"
                                                         style="height: 332px;">
                                                         <img class="profile-listing-img"
@@ -1105,7 +935,7 @@
                                     <h3 class="mb-0 pb-0">YouTube</h3>
                                     <div class="d-flex justify-content-between">
                                         <p class="text-gray p-0 m-0 ">Hire YouTube influencers</p>
-                                        <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                        <span class="text-black"><b>see all</b></span>
                                     </div>
                                 </article>
                             </div><!-- .nk-block -->
@@ -1160,7 +990,7 @@
                                     <h3 class="mb-0 pb-0">User Generated Content</h3>
                                     <div class="d-flex justify-content-between">
                                         <p class="text-gray p-0 m-0 ">Purchase high-quality UGC</p>
-                                        <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                        <span class="text-black"><b>see all</b></span>
                                     </div>
                                 </article>
                             </div><!-- .nk-block -->
@@ -1444,7 +1274,7 @@
                                                 </h2>
                                                 <h3 class="cta-txt text-white">Search Instagram, TikTok, and
                                                     YouTube influencers.</h3>
-                                                <a href="{{route('influencer.search')}}">
+                                                <a href="influencers.html">
                                                     <div class="btn cta-btn font-100 py-3 px-4 mt-2">Search
                                                         Influencers</div>
                                                 </a>
@@ -1463,5 +1293,19 @@
         </div>
         </div>
         <!-- content @e -->
-        <script src="{{ url('assets/js/modal.js') }}"></script>
+        <script>
+            // JavaScript code to handle multiple category selection
+            $(document).ready(function() {
+                $('#searchForm').submit(function(e) {
+                    e.preventDefault();
+                    var platform = $(this).find('.dropdown-input').val();
+                    var category = $(this).find('.dropdown-list-2 p.selected').map(function() {
+                        return $(this).text().trim();
+                    }).get().join(',');
+                    var url = "{{ route('search.Influencer', ['id' => 'search']) }}";
+                    url = url.replace('search', platform);
+                    window.location.href = url + '?category=' + category;
+                });
+            });
+        </script>
     @endsection

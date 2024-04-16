@@ -11,7 +11,7 @@
                                 <div class="row align-center p-0 m-0 mb-5">
                                     <div class="col-sm-12 col-md-6">
                                         <div style="text-align: center">
-                                            <img class="img" src="assets/ebook/ebook_cover.png"
+                                            <img class="img" src="ebook/ebook_cover.png"
                                                 alt="Ultimate Guide to TikTok For Brands 2021">
                                         </div>
 

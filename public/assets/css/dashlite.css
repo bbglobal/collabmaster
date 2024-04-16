@@ -224,13 +224,13 @@ sup {
 }
 
 a {
-  /* color: #798bff; */
+  color: #798bff;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  /* color: #465fff; */
+  color: #465fff;
   text-decoration: underline;
 }
 
@@ -2983,7 +2983,7 @@ textarea.form-control.is-invalid {
 }
 
 .btn:hover {
-  /* color: #fff; */
+  color: #fff;
   text-decoration: none;
 }
 

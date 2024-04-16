@@ -118,7 +118,7 @@
         <div class="page-holder">
             <div class="campaign-info-holder">
                 <h1 class="lists-title">Campaigns</h1>
-                <a href="{{ route('start.campaign', ['id' => 1]) }}" class="create-btn"><img class="create-btn-img"
+                <a href="{{ route('create.campaign', ['id' => 1]) }}" class="create-btn"><img class="create-btn-img"
                         src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/create.svg">Create
                     Campaign</a>
             </div>

@@ -30,11 +30,11 @@
                                             <div class="card h-100 p-0">
                                                 <div class="card-inner p-0">
                                                     <div class="project">
-                                                        <a href="{{route('case.study')}}">
+                                                        <a href="case-study.html">
                                                             <div class="profile-listing-img-holder position-relative"
                                                                 style="height: 332px;">
                                                                 <img class="profile-listing-img"
-                                                                    src="assets/caseStudies/wealthsimple/header.jpg" alt="">
+                                                                    src="caseStudies/wealthsimple/header.jpg" alt="">
                                                                 <div class="d-block position-absolute pb-1 px-1"
                                                                     style="bottom: 0; left: 10px;line-height: 1.2;">
 
@@ -52,11 +52,11 @@
                                             <div class="card h-100 p-0">
                                                 <div class="card-inner p-0">
                                                     <div class="project">
-                                                        <a href="{{route('case.study')}}">
+                                                        <a href="case-study.html">
                                                             <div class="profile-listing-img-holder position-relative"
                                                                 style="height: 332px;">
                                                                 <img class="profile-listing-img"
-                                                                    src="assets/caseStudies/wealthsimple/header.jpg" alt="">
+                                                                    src="caseStudies/wealthsimple/header.jpg" alt="">
                                                                 <div class="d-block position-absolute pb-1 px-1"
                                                                     style="bottom: 0; left: 10px;line-height: 1.2;">
 
@@ -74,11 +74,11 @@
                                             <div class="card h-100 p-0">
                                                 <div class="card-inner p-0">
                                                     <div class="project">
-                                                        <a href="{{route('case.study')}}">
+                                                        <a href="case-study.html">
                                                             <div class="profile-listing-img-holder position-relative"
                                                                 style="height: 332px;">
                                                                 <img class="profile-listing-img"
-                                                                    src="assets/caseStudies/wealthsimple/header.jpg" alt="">
+                                                                    src="caseStudies/wealthsimple/header.jpg" alt="">
                                                                 <div class="d-block position-absolute pb-1 px-1"
                                                                     style="bottom: 0; left: 10px;line-height: 1.2;">
 
@@ -112,11 +112,11 @@
                                             <div class="card h-100 p-0">
                                                 <div class="card-inner p-0">
                                                     <div class="project">
-                                                        <a href="{{route('case.study')}}">
+                                                        <a href="case-study.html">
                                                             <div class="profile-listing-img-holder position-relative"
                                                                 style="height: 332px;">
                                                                 <img class="profile-listing-img"
-                                                                    src="assets/caseStudies/wealthsimple/header.jpg" alt="">
+                                                                    src="caseStudies/wealthsimple/header.jpg" alt="">
                                                                 <div class="d-block position-absolute pb-1 px-1"
                                                                     style="bottom: 0; left: 10px;line-height: 1.2;">
 
@@ -134,11 +134,11 @@
                                             <div class="card h-100 p-0">
                                                 <div class="card-inner p-0">
                                                     <div class="project">
-                                                        <a href="{{route('case.study')}}">
+                                                        <a href="case-study.html">
                                                             <div class="profile-listing-img-holder position-relative"
                                                                 style="height: 332px;">
                                                                 <img class="profile-listing-img"
-                                                                    src="assets/caseStudies/wealthsimple/header.jpg" alt="">
+                                                                    src="caseStudies/wealthsimple/header.jpg" alt="">
                                                                 <div class="d-block position-absolute pb-1 px-1"
                                                                     style="bottom: 0; left: 10px;line-height: 1.2;">
 
@@ -156,11 +156,11 @@
                                             <div class="card h-100 p-0">
                                                 <div class="card-inner p-0">
                                                     <div class="project">
-                                                        <a href="{{route('case.study')}}">
+                                                        <a href="case-study.html">
                                                             <div class="profile-listing-img-holder position-relative"
                                                                 style="height: 332px;">
                                                                 <img class="profile-listing-img"
-                                                                    src="assets/caseStudies/wealthsimple/header.jpg" alt="">
+                                                                    src="caseStudies/wealthsimple/header.jpg" alt="">
                                                                 <div class="d-block position-absolute pb-1 px-1"
                                                                     style="bottom: 0; left: 10px;line-height: 1.2;">
 
@@ -178,11 +178,11 @@
                                             <div class="card h-100 p-0">
                                                 <div class="card-inner p-0">
                                                     <div class="project">
-                                                        <a href="{{route('case.study')}}">
+                                                        <a href="case-study.html">
                                                             <div class="profile-listing-img-holder position-relative"
                                                                 style="height: 332px;">
                                                                 <img class="profile-listing-img"
-                                                                    src="assets/caseStudies/wealthsimple/header.jpg" alt="">
+                                                                    src="caseStudies/wealthsimple/header.jpg" alt="">
                                                                 <div class="d-block position-absolute pb-1 px-1"
                                                                     style="bottom: 0; left: 10px;line-height: 1.2;">
 
@@ -200,11 +200,11 @@
                                             <div class="card h-100 p-0">
                                                 <div class="card-inner p-0">
                                                     <div class="project">
-                                                        <a href="{{route('case.study')}}">
+                                                        <a href="case-study.html">
                                                             <div class="profile-listing-img-holder position-relative"
                                                                 style="height: 332px;">
                                                                 <img class="profile-listing-img"
-                                                                    src="assets/caseStudies/wealthsimple/header.jpg" alt="">
+                                                                    src="caseStudies/wealthsimple/header.jpg" alt="">
                                                                 <div class="d-block position-absolute pb-1 px-1"
                                                                     style="bottom: 0; left: 10px;line-height: 1.2;">
 
@@ -235,13 +235,13 @@
                                             <div class="partner-holder">
                                                 <div class="partner-img-holder">
                                                     <img class="partner-img"
-                                                        src="assets/websiteImages/creatorMarketplace/partners/koji.png"
+                                                        src="websiteImages/creatorMarketplace/partners/koji.png"
                                                         alt="Koji logo" loading="lazy">
                                                 </div>
                                                 <div class="partner-desc">The world's most powerful Link in Bio, with hundreds
                                                     of free apps to customize and monetize. Easily embed your Collabstr profile
                                                     directly on your Koji page.</div>
-                                                <a href="#" rel="nofollow"
+                                                <a href="https://withkoji.com/apps/collabstr-473924ab" rel="nofollow"
                                                     target="_blank" class="learn-more-btn"><u>Learn more</u></a>
                                             </div>
                                         </div>

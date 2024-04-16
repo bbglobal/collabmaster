@@ -5,15 +5,14 @@
         .nk-footer {
             display: none;
         }
+/* 
+        #brand-none {
+            display: none;
+        }
 
-        /*
-            #brand-none {
-                display: none;
-            }
-
-            #others {
-                display: block;
-            } */
+        #others {
+            display: block;
+        } */
     </style>
 @endpush
 
@@ -34,16 +33,12 @@
                     <div class="nk-content-wrap">
 
                         <div class="nk-block nk-block-middle nk-auth-body wide-xs pt-0">
-                            {{-- <div class="progress progress-lg">
+                            <div class="progress progress-lg">
                                 <div class="progress-bar" id="progressBar" data-progress="25">25%</div>
-                            </div> --}}
+                            </div>
                             <div id="s-1">
                                 <div class="card">
                                     <div class="card-inner card-inner p-0">
-                                        <div class="top-btn-holder">
-                                            {{-- <div class="example-profile-btn">View Example Campaign</div> --}}
-                                            <div class="step-holder">1/7</div>
-                                        </div>
                                         <div class="nk-block-head my-5">
                                             <div class="nk-block-head-content">
                                                 <h3 class="nk-block-title"><b>Let's find you the perfect

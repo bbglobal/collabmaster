@@ -17,7 +17,7 @@
                                             link. They will also get $10.</p>
                                     </div>
                                     <div>
-                                        <a class="btn btn-dark btn-sign-up font-w-300 font-135" href="{{route('brand.signup')}}">Join as
+                                        <a class="btn btn-dark btn-sign-up font-w-300 font-135" href="brand-signup.html">Join as
                                             Affiliate</a>
                                     </div>
                                 </div>

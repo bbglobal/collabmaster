@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('package_id')->nullable();
-            $table->unsignedBigInteger('creator_id')->nullable();
+            $table->integer('brand_id')->unsigned()->nullable();
+            $table->integer('package_id')->unsigned()->nullable();
+            $table->integer('creator_id')->unsigned()->nullable();
             $table->string('full_name');
             $table->string('address');
             $table->text('description');

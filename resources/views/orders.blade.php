@@ -82,10 +82,10 @@
         </div>
     </div>
     <div id="content">
-        @if (Auth::user()->role == 'creator' && count($orders) > 0)
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+        @if (Auth::user()->role == 'creator')
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
             {{-- if user has no orders  --}}
             {{-- <div class="no-orders">Your orders will be displayed here. Share your profile to help increase sales.</div> --}}
             {{-- <div class="btn no-orders-btn" onclick="copyLink()">Share Profile</div> --}}
@@ -94,59 +94,50 @@
             {{-- if user got orders --}}
             <div class="orders-container">
                 <h6>My Orders</h6>
-                @foreach ($orders as $order)
-                    <div class="order-info">
-                        <small>
-                            <strong>{{ $order->package_content_type }}</strong><br />
-                        </small>
-                        <small>{{ $order->description }}</small>
-                    </div>
-                    <div class="order-state">
-                        @if ($order->conformation_status == 'Accepted')
-                            <button type="button" class="btn no-orders-btn" style="margin: 1rem;" disabled>
-                                Accepted
-                            </button>
-                        @elseif($order->conformation_status == 'Decline')
-                            <button type="button" class="btn no-orders-btn" style="margin: 1rem;" disabled>
-                                Decline
-                            </button>
-                        @else
-                            <form action="{{ route('order.conformation.process') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $order->id }}">
-                                <input type="hidden" name="conformation_status" value="Accepted">
-                                <button type="submit" class="btn no-orders-btn" style="margin: 1rem;">Accept</button>
-                            </form>
+                @foreach($orders as $order)
+                <div class="order-info">
+                    <small>
+                        <strong>{{$order->package_content_type}}</strong><br />
+                    </small>
+                    <small>{{$order->description}}</small>
+                </div>
+                <div class="order-state">
+                    @if($order->payment_status == 'Pending')
+                    <button type="button" class="btn no-orders-btn" style="margin: 1rem;" disabled>
+                        Pending
+                    </button>
+                    @elseif($order->payment_status == 'Completed')
+                    <button type="button" class="btn no-orders-btn" style="margin: 1rem;" disabled>
+                        Completed
+                    </button>
+                    @elseif($order->payment_status == 'Decline')
+                    <button type="button" class="btn no-orders-btn" style="margin: 1rem;" disabled>
+                        Decline
+                    </button>
+                    @else
+                    <form action="{{route('order.conformation.process')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$order->id}}">
+                        <input type="hidden" name="payment_status" value="Completed">
+                        <button type="submit" class="btn no-orders-btn" style="margin: 1rem;">Accept</button>
+                    </form>
 
-                            <form action="{{ route('order.conformation.process') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $order->id }}">
-                                <input type="hidden" name="conformation_status" value="Decline">
-                                <button type="submit" class="btn no-orders-outline-btn"
-                                    style="margin: 1rem;">Decline</button>
-                            </form>
-                        @endif
+                    <form action="{{route('order.conformation.process')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$order->id}}">
+                        <input type="hidden" name="payment_status" value="Decline">
+                        <button type="submit" class="btn no-orders-outline-btn" style="margin: 1rem;">Decline</button>
+                    </form>
+                    @endif
 
-                    </div>
+                </div>
                 @endforeach
 
 
-            </div>
-        @elseif(Auth::user()->role == 'creator' && count($offers) > 0)
-            <div class="orders-container">
-                <h5>My Offers</h5>
-                @foreach ($offers as $row)
-                    <h6 class="mt-5"><u>{{ $row->package_title }}</u></h6>
-                    <small class="text-muted" style="word-break: break-word;">{{ $row->package_description }}</small>
-                    <a href="{{ url('chatify/' . $row->brand_id) }}" type="button" class="btn no-orders-btn"
-                        style="margin: 1rem;">
-                        Let's Chat
-                    </a>
-                @endforeach
             </div>
         @else
-            <div class="no-orders">Your orders will be displayed here. To create an order, purchase a package from a Brand.
-            </div>
+            <div class="no-orders">Your orders will be displayed here. To create an order, purchase a package from an
+                influencer.</div>
             <a href="{{ route('explore') }}" class="btn no-orders-btn">Explore Influencers</a>
         @endif
     </div>
@@ -161,5 +152,13 @@
             textArea.remove();
             showMsg('Profile URL copied to clipboard.', 'succ')
         }
+
+        $('#accept').click((event) => {
+            $(event.target).text('Confirm Accept');
+        });
+
+        $('#decline').click((event) => {
+            $(event.target).text('Confirm Decline');
+        });
     </script>
 @endsection

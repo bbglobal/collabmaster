@@ -4,9 +4,7 @@
     <style>
         .nk-footer {
             display: none;
-        }
-
-        #brand-none {
+        }#brand-none{
             display: none;
         }
     </style>
@@ -22,15 +20,6 @@
             </div>
         </div>
     @endif
-    <div id="msg-holder">
-        <div id="msg-holder-row">
-            <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/err.svg" id="msg-img-err"
-                class="succ-err-msg-img">
-            <div id="msg">{{ $message }}</div>
-        </div>
-    </div>
-
-
     <div class="nk-content main-outer-container">
         <div class="container-fluid">
             <div class="nk-content-inner">
@@ -38,39 +27,36 @@
                     <div class="nk-content-wrap">
 
                         <div class="nk-block nk-block-middle nk-auth-body wide-xs pt-0">
+                            <div class="progress progress-lg">
+                                <div class="progress-bar" id="progressBar" data-progress="25">25%</div>
+                            </div>
 
                             <div id="s-2">
                                 <div class="card">
                                     <div class="card-inner card-inner p-0">
-                                        <div class="top-btn-holder">
-                                            {{-- <div class="example-profile-btn">View Example Campaign</div> --}}
-                                            <div class="step-holder">2/7</div>
-                                        </div>
                                         <div class="nk-block-head my-5">
                                             <div class="nk-block-head-content">
                                                 <h3 class="nk-block-title"><b>Which categories best describe your brand?</b>
                                                 </h3>
                                             </div>
                                         </div>
-                                        <a href="{{ route('register.brand', ['id' => 1]) }}" class="top-btn-holder d-block">
+                                        <div class="top-btn-holder">
                                             <svg class="back-btn" viewBox="0 0 24 24" aria-hidden="true">
                                                 <path
                                                     d="M19 11H7.83l4.882-4.882a1 1 0 000-1.413h-.005a1 1 0 00-1.408 0L4.705 11.3a1 1 0 000 1.41L11.3 19.3a1 1 0 001.41 0 1 1 0 000-1.41L7.83 13H19a1 1 0 001-1 1 1 0 00-1-1z">
                                                 </path>
                                             </svg>
-                                        </a>
+                                        </div>
 
                                         <form method="POST" action="{{ route('register.brand', ['id' => 3]) }}"
                                             id="form">
                                             @csrf
                                             <div class="niches-holder scroll-holder">
                                                 <label class="niche-holder" for="beauty">Beauty
-                                                    <input type="checkbox" name="categories[]" id="beauty"
-                                                        value="Beauty">
+                                                    <input type="checkbox" name="categories[]" id="beauty" value="Beauty">
                                                 </label>
                                                 <label class="niche-holder" for="travel">Travel
-                                                    <input type="checkbox" name="categories[]" id="travel"
-                                                        value="Travel">
+                                                    <input type="checkbox" name="categories[]" id="travel" value="Travel">
                                                 </label>
                                                 <label class="niche-holder" for="health">Health &amp; Fitness
                                                     <input type="checkbox" name="categories[]" id="health"
@@ -121,8 +107,7 @@
                                                         value="Technology">
                                                 </label>
                                                 <label class="niche-holder" for="gaming">Gaming
-                                                    <input type="checkbox" name="categories[]" id="gaming"
-                                                        value="Gaming">
+                                                    <input type="checkbox" name="categories[]" id="gaming" value="Gaming">
                                                 </label>
                                                 <label class="niche-holder" for="healthcare">Healthcare
                                                     <input type="checkbox" name="categories[]" id="healthcare"
@@ -182,27 +167,9 @@
 
                 } else {
                     console.log('Maximum selection limit (3) reached.');
-                    showMsg('You can only select 3 niches', 'err');
                     $(this).prop('checked', false);
                 }
             });
-
-            $('#msg-holder').hide();
-
-            function showMsg(txt, type) {
-                // hide img first
-                $('.succ-err-msg-img').hide();
-                $(`#msg-img-${type}`).show();
-                $('#msg').text(txt);
-                $('#msg-holder').fadeIn();
-                setTimeout(hideMsg, 5000);
-            }
-
-            function hideMsg() {
-                $('#msg-holder').fadeOut();
-                $('.succ-err-msg-img').fadeOut();
-            }
-
         });
     </script>
 @endsection

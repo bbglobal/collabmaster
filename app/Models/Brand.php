@@ -12,14 +12,6 @@ class Brand extends Model
     protected $fillable = [
         '_token',
         'industry',
-        'cover_photo',
-        'location',
-        'description',
-        'website',
-        'instagram',
-        'tiktok',
-        'youtube',
-        'twitter',
         'categories',
         'familiarity',
         'platforms',
@@ -28,4 +20,8 @@ class Brand extends Model
         'genderOption',
         'user_id',
     ];
+
+    public function user_brand(){
+        return $this->belongsTo(User:: class, 'user_id','id');
+    }
 }

@@ -36,11 +36,11 @@ class Campaign extends Model
         'delivery_date',
         'genderOption_6',
         'mentions',
-        'file_path',
-        'img_1',
-        'img_2',
-        'img_3',
-        'img_4',
+        'img_files',
+        'img1',
+        'img2',
+        'img3',
+        'img4',
         'content_1',
         'content_2',
         'content_3',
@@ -48,5 +48,6 @@ class Campaign extends Model
         'files',
         'file_list_objs',
         'user_id',
+        // Add other fields as needed
     ];
 }

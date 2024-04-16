@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
-
-        'package_content_type_',
-        'package_quantity_',
-        'package_duration_',
-        'package_duration_unit_',
-        'package_price_',
-        'package_description_',
-        'user_id',
+        // Define fillable fields here
+        'package_content_type',
+        'package_quantity',
+        'package_duration',
+        'package_duration_unit',
+        'package_price',
+        'package_description',
+        'user_id', // Assuming there's a relationship with users
     ];
 }

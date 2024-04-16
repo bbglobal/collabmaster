@@ -236,6 +236,8 @@
                     <div class="signout-btn btn settings-btn" onclick="location.href='/logout'">Sign Out</div>
 
                     <div class="acc-btn-holder">
+
+
                         <div class="delete-acc-btn">Delete Account</div>
                     </div>
 
@@ -402,23 +404,23 @@
 
         <select class="input" name="delete_reason" required>
             <option value="" disabled selected hidden>Please select a reason</option>
-
+            
                 <option value="1">Too busy/Not taking new partnerships</option>
-
+            
                 <option value="2">Not enough orders</option>
-
+            
                 <option value="3">I&#x27;ll be back</option>
-
+            
                 <option value="4">Other</option>
-
+            
                 <option value="5">Orders not relevant</option>
-
+            
         </select>
     </div>
 
     <div class="modal-content-footer">
         <button class='btn modal-btn'>Delete Account</button>
-
+        
     </div>
 </form>
 `);

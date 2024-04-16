@@ -32,4 +32,8 @@ class Creator extends Model
         'img_4',
         'user_id',
     ];
+
+    public function user_creator(){
+        return $this->belongsTo(User:: class, 'user_id','id');
+    }
 }

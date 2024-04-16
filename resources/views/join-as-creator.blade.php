@@ -21,10 +21,9 @@
                                         @csrf
                                         <div class="hero-holder">
                                             <div class="username-holder">
-                                                <div class="username-domain">collabmaster.com/</div>
+                                                <div class="username-domain">collabstr.com/</div>
                                                 <div class="username-input-holder">
-                                                    <input type="text" name="username" class="username-input"
-                                                        placeholder="yourname" id="username">
+                                                    <input type="text" name="username" class="username-input" placeholder="yourname" id="username">
                                                 </div>
                                                 <button type="submit" class="username-btn" id="primary">
                                                     Claim
@@ -96,45 +95,130 @@
 
                             <div class="nk-block mb-4">
                                 <div class="listing-row">
-                                    @foreach ($creators as $row)
-                                        <div class="profile-listing-holder custom-col-4 m-0"
-                                            style="padding: 0 0.5rem !important;">
-                                            <div class="card h-100 p-0">
-                                                <div class="card-inner p-0">
-                                                    <a href="{{ route('influencer.details', ['id' => $row->id]) }}">
-                                                        <div class="project">
-                                                            <div class="profile-listing-img-holder position-relative">
-                                                                <div class="profile-listing-badge-holder"
-                                                                    title="Top creators have completed multiple orders and have a high rating from brands.">
+                                    <div class="profile-listing-holder custom-col-4 m-0" style="padding: 0 0.5rem !important;">
+                                        <div class="card h-100 p-0">
+                                            <div class="card-inner p-0">
+                                                <a href="influencer-details.html">
+                                                    <div class="project">
+                                                        <div class="profile-listing-img-holder position-relative">
+                                                            <img class="profile-listing-img"
+                                                                src="assets/sellers/16445/16276271080633945.webp"
+                                                                alt="">
 
-                                                                </div>
-                                                                <img class="profile-listing-img"
-                                                                    src="{{ url('assets/images/' . $row->img_1) }}"
-                                                                    alt="">
-                                                                <div class="d-block position-absolute pb-1"
-                                                                    style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                                    <div class="text-white font-80 font-w-600 p-0 m-0">
-                                                                        {{ $row->full_name }}</div>
-                                                                    <div class="text-white font-75 font-w-300 p-0 m-0">
-                                                                        {{ $row->location }}</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="project-details">
-                                                                <div class="d-flex justify-content-between">
-                                                                    <span
-                                                                        class="font-90 text-gray-light">{{ $row->platform }}</span>
-                                                                    <span
-                                                                        class="text-black"><b>₹{{ $row->package_price_ }}</b></span>
-                                                                </div>
-                                                                <div class="text-reduce font-90 font-w-300 text-gray-1">
-                                                                    {{ $row->categories }}</div>
+                                                            <div class="d-block position-absolute pb-1"
+                                                                style="bottom: 0; left: 10px;line-height: 1.2;">
+                                                                <div class="text-white font-80 font-w-600 p-0 m-0">influencers
+                                                                    Name</div>
+                                                                <div class="text-white font-75 font-w-300 p-0 m-0">Address,
+                                                                    District, State</div>
                                                             </div>
                                                         </div>
-                                                    </a>
-                                                </div>
+                                                        <div class="project-details">
+                                                            <div class="d-flex justify-content-between">
+                                                                <span class="font-90 text-gray-light">Instagram</span>
+                                                                <span class="text-black"><b>₹1100</b></span>
+                                                            </div>
+                                                            <div class="text-reduce font-90 font-w-300 text-gray-1"> Fashion
+                                                                &amp; Lifestyle Content Creator Fashion &amp; Lifestyl</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    </div>
+                                    <div class="profile-listing-holder custom-col-4 m-0" style="padding: 0 0.5rem !important;">
+                                        <div class="card h-100 p-0">
+                                            <div class="card-inner p-0">
+                                                <a href="influencer-details.html">
+                                                    <div class="project">
+                                                        <div class="profile-listing-img-holder position-relative">
+                                                            <img class="profile-listing-img"
+                                                                src="assets/sellers/22281/1627628109068337.webp" alt="">
+
+                                                            <div class="d-block position-absolute pb-1"
+                                                                style="bottom: 0; left: 10px;line-height: 1.2;">
+                                                                <div class="text-white font-80 font-w-600 p-0 m-0">influencers
+                                                                    Name</div>
+                                                                <div class="text-white font-75 font-w-300 p-0 m-0">Address,
+                                                                    District, State</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="project-details">
+                                                            <div class="d-flex justify-content-between">
+                                                                <span class="font-90 text-gray-light">Instagram</span>
+                                                                <span class="text-black"><b>₹1100</b></span>
+                                                            </div>
+                                                            <div class="text-reduce font-90 font-w-300 text-gray-1"> Fashion
+                                                                &amp; Lifestyle Content Creator Fashion &amp; Lifestyl</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-listing-holder custom-col-4 m-0" style="padding: 0 0.5rem !important;">
+                                        <div class="card h-100 p-0">
+                                            <div class="card-inner p-0">
+                                                <a href="influencer-details.html">
+                                                    <div class="project">
+                                                        <div class="profile-listing-img-holder position-relative">
+                                                            <img class="profile-listing-img"
+                                                                src="assets/sellers/11075/1647476418558705.webp"
+                                                                alt="">
+
+                                                            <div class="d-block position-absolute pb-1"
+                                                                style="bottom: 0; left: 10px;line-height: 1.2;">
+                                                                <div class="text-white font-80 font-w-600 p-0 m-0">influencers
+                                                                    Name</div>
+                                                                <div class="text-white font-75 font-w-300 p-0 m-0">Address,
+                                                                    District, State</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="project-details">
+                                                            <div class="d-flex justify-content-between">
+                                                                <span class="font-90 text-gray-light">Instagram</span>
+                                                                <span class="text-black"><b>₹1100</b></span>
+                                                            </div>
+                                                            <div class="text-reduce font-90 font-w-300 text-gray-1"> Fashion
+                                                                &amp; Lifestyle Content Creator Fashion &amp; Lifestyl</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-listing-holder custom-col-4 m-0"
+                                        style="padding: 0 0.5rem !important;">
+                                        <div class="card h-100 p-0">
+                                            <div class="card-inner p-0">
+                                                <a href="influencer-details.html">
+                                                    <div class="project">
+                                                        <div class="profile-listing-img-holder position-relative">
+                                                            <img class="profile-listing-img"
+                                                                src="assets/sellers/8718/1627632207827411.webp"
+                                                                alt="">
+
+                                                            <div class="d-block position-absolute pb-1"
+                                                                style="bottom: 0; left: 10px;line-height: 1.2;">
+                                                                <div class="text-white font-80 font-w-600 p-0 m-0">influencers
+                                                                    Name</div>
+                                                                <div class="text-white font-75 font-w-300 p-0 m-0">Address,
+                                                                    District, State</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="project-details">
+                                                            <div class="d-flex justify-content-between">
+                                                                <span class="font-90 text-gray-light">Instagram</span>
+                                                                <span class="text-black"><b>₹1100</b></span>
+                                                            </div>
+                                                            <div class="text-reduce font-90 font-w-300 text-gray-1"> Fashion
+                                                                &amp; Lifestyle Content Creator Fashion &amp; Lifestyl</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div><!-- .nk-block -->
 
@@ -146,12 +230,14 @@
                                             alt="Wealthsimple logo" loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
-                                        <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/clickup.svg"
-                                            alt="ClickUp logo" loading="lazy">
+                                        <img class="partner-img"
+                                            src="assets/websiteImages/creatorMarketplace/logos/clickup.svg" alt="ClickUp logo"
+                                            loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
-                                        <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/hopper.svg"
-                                            alt="Hopper logo" loading="lazy">
+                                        <img class="partner-img"
+                                            src="assets/websiteImages/creatorMarketplace/logos/hopper.svg" alt="Hopper logo"
+                                            loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
                                         <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/un.svg"
@@ -195,8 +281,8 @@
                                                     <div class="d-block position-absolute pb-1 px-1"
                                                         style="bottom: 0; left: 10px;line-height: 1.2;">
                                                         <h5 class="text-white">1</h5>
-                                                        <div class="text-white font-135 font-w-600 p-0 m-0">Search
-                                                            Influencers</div>
+                                                        <div class="text-white font-135 font-w-600 p-0 m-0">Search Influencers
+                                                        </div>
                                                         <div class="step-txt mb-2">Search through thousands of vetted
                                                             Instagram, TikTok, and YouTube
                                                             influencers.</div>
@@ -219,10 +305,11 @@
                                                     <div class="d-block position-absolute pb-1 px-1"
                                                         style="bottom: 0; left: 10px;line-height: 1.2;">
                                                         <h5 class="text-white">2</h5>
-                                                        <div class="text-white font-135 font-w-600 p-0 m-0">Purchase Securely
+                                                        <div class="text-white font-135 font-w-600 p-0 m-0">Search Influencers
                                                         </div>
-                                                        <div class="step-txt mb-2">Safely purchase through Collabstr. We hold
-                                                            your payment until the work is completed.</div>
+                                                        <div class="step-txt mb-2">Search through thousands of vetted
+                                                            Instagram, TikTok, and YouTube
+                                                            influencers.</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -242,10 +329,11 @@
                                                     <div class="d-block position-absolute pb-1 px-1"
                                                         style="bottom: 0; left: 10px;line-height: 1.2;">
                                                         <h5 class="text-white">3</h5>
-                                                        <div class="text-white font-135 font-w-600 p-0 m-0">Receive Quality
-                                                            Content</div>
-                                                        <div class="step-txt mb-2">Receive your high-quality content from
-                                                            influencers directly through the platform.</div>
+                                                        <div class="text-white font-135 font-w-600 p-0 m-0">Search Influencers
+                                                        </div>
+                                                        <div class="step-txt mb-2">Search through thousands of vetted
+                                                            Instagram, TikTok, and YouTube
+                                                            influencers.</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,7 +355,7 @@
                                                 <div class="position-relative" style="height: 185px; overflow: hidden;">
                                                     <div class="d-block pb-1 px-1"
                                                         style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                        <h4 style="font-size: 1.5rem;"><b><em
+                                                        <h4 style="font-size: 2rem;"><b><em
                                                                     class="icon ni ni-sign-dollar"></em></b>
                                                             <div class="feature-title p-0 m-0">No Upfront Cost</div>
                                                             <div class="feature-txt mb-2">Search influencers for free. No
@@ -287,7 +375,7 @@
                                                 <div class="position-relative" style="height: 220px;">
                                                     <div class="d-block pb-1 px-1"
                                                         style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                        <h4 style="font-size: 1.5rem;"><b><em
+                                                        <h4 style="font-size: 2rem;"><b><em
                                                                     class="icon ni ni-list-check"></em></b>
                                                             <div class="feature-title p-0 m-0">Vetted Influencers</div>
                                                             <div class="feature-txt mb-2">Search influencers for free. No
@@ -307,7 +395,7 @@
                                                 <div class="position-relative" style="height: 220px;">
                                                     <div class="d-block pb-1 px-1"
                                                         style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                        <h4 style="font-size: 1.5rem;"><b><em
+                                                        <h4 style="font-size: 2rem;"><b><em
                                                                     class="icon ni ni-msg-circle-fill"></em></b>
                                                             <div class="feature-title p-0 m-0">Instant Chat</div>
                                                             <div class="feature-txt mb-2">Search influencers for free. No
@@ -327,8 +415,47 @@
                                                 <div class="position-relative" style="height: 220px;">
                                                     <div class="d-block pb-1 px-1"
                                                         style="bottom: 0; left: 10px;line-height: 1.2;">
-                                                        <h4 style="font-size: 1.5rem;"><b><em
+                                                        <h4 style="font-size: 2rem;"><b><em
                                                                     class="icon ni ni-lock-alt-fill"></em></b>
+                                                            <div class="feature-title p-0 m-0">Secure Purchases</div>
+                                                            <div class="feature-txt mb-2">Search influencers for free. No
+                                                                subscriptions, contracts or hidden fees.</div>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-listing-holder col-sm-12 col-md-6 col-lg-3 m-0 mb-4"
+                                    style="padding: 0 0.5rem !important;">
+                                    <div class="card h-100 p-0 px-3">
+                                        <div class="card-inner p-0">
+                                            <div class="project">
+                                                <div class="position-relative" style="height: 220px;">
+                                                    <div class="d-block pb-1 px-1"
+                                                        style="bottom: 0; left: 10px;line-height: 1.2;">
+                                                        <h4 style="font-size: 2rem;"><b><em
+                                                                    class="icon ni ni-file-text-fill"></em></b>
+                                                            <div class="feature-title p-0 m-0">Instant Chat</div>
+                                                            <div class="feature-txt mb-2">Search influencers for free. No
+                                                                subscriptions, contracts or hidden fees.</div>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-listing-holder col-sm-12 col-md-6 col-lg-3 m-0 mb-4"
+                                    style="padding: 0 0.5rem !important;">
+                                    <div class="card h-100 p-0 px-3">
+                                        <div class="card-inner p-0">
+                                            <div class="project">
+                                                <div class="position-relative" style="height: 220px;">
+                                                    <div class="d-block pb-1 px-1"
+                                                        style="bottom: 0; left: 10px;line-height: 1.2;">
+                                                        <h4 style="font-size: 2rem;"><b><em class="icon ni ni-link"></em></b>
                                                             <div class="feature-title p-0 m-0">Secure Purchases</div>
                                                             <div class="feature-txt mb-2">Search influencers for free. No
                                                                 subscriptions, contracts or hidden fees.</div>
@@ -1132,7 +1259,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <img loading="lazy" alt="top influencers" class="cta-img" src="assets/images/cta.png">
+                                    <img loading="lazy" alt="top influencers" class="cta-img" src="public/images/cta.png">
                                 </div>
                             </div>
                         </div>
@@ -1150,14 +1277,14 @@
             $(document).ready(function() {
                 $('form').submit(function(event) {
                     event.preventDefault();
-
+    
                     $('#primary').addClass("d-none");
                     $("#loading").removeClass("d-none")
                     var username = $('#username').val();
-
+    
                     $(this).attr('action', $(this).attr('action') + '/creator-signup/' + encodeURIComponent(
                         username));
-
+    
                     this.submit();
                 });
             });

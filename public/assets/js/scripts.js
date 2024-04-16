@@ -121,7 +121,7 @@
 
   NioApp.PassSwitch = function () {
     NioApp.Passcode('.passcode-switch');
-  }; // Toastr Message @v1.0
+  }; // Toastr Message @v1.0 
 
 
   NioApp.Toast = function (msg, ttype, opt) {
@@ -692,6 +692,20 @@
   NioApp.init();
   return NioApp;
 }(NioApp, jQuery);
+
+
+function profile() {
+  location.href = '/profile';
+}
+function account() {
+  location.href = '/account';
+}
+function earnings() {
+  location.href = '/earnings';
+}
+function logout() {
+  location.href = '/logout';
+}
 
 
 function showMsg(txt, type) {

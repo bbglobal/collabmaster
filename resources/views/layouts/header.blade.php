@@ -59,10 +59,12 @@
             border-right: 3px solid #bdbcbc;
         }
 
-        .filter-placeholder input:focus-visible,
-        .username-input-holder input:focus-visible {
-            border: none;
-            outline: none;
+        input:focus-visible {
+            border: none !important;
+        }
+
+        input:focus {
+            border: none !important;
         }
     </style>
 </head>
@@ -157,9 +159,8 @@
                                                         <div class="dashboard-menu-btn">|||</div>
                                                         <img class="dashboard-img" src="{{ Auth::user()->avatar }}">
                                                         <div class="dashboard-menu">
-                                                            <div class="dashboard-menu-item"  onclick="profile()">Profile
+                                                            <div class="dashboard-menu-item" onclick="profile()">Profile
                                                             </div>
-                                                            <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
                                                             <div class="dashboard-menu-item" onclick="account()">Account
                                                             </div>
                                                             <div class="dashboard-menu-item" onclick="earnings();">Billing
@@ -173,11 +174,6 @@
                                         </ul>
                                     @else
                                         <ul class="nk-menu nk-menu-main pr-0" id="others">
-                                            <li class="nk-menu-item">
-                                                <a href="{{ route('brand.campaigns') }}" class="nk-menu-link">
-                                                    <span class="nk-menu-text">Campaigns</span>
-                                                </a>
-                                            </li>
                                             <li class="nk-menu-item">
                                                 <a href="{{ route('creator.orders') }}" class="nk-menu-link">
                                                     <span class="nk-menu-text">Orders</span>
@@ -199,11 +195,14 @@
                                                         <div class="dashboard-menu-btn">|||</div>
                                                         <img class="dashboard-img" src="{{ Auth::user()->avatar }}">
                                                         <div class="dashboard-menu">
-                                                            <div class="dashboard-menu-item" onclick="profile()">Profile</div>
-                                                            <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
-                                                            <div class="dashboard-menu-item" onclick="account()">Account</div>
-                                                            <div class="dashboard-menu-item" onclick="earnings()">Earning</div>
-                                                            <div class="dashboard-menu-item" onclick="logout()">Sign Out</div>
+                                                            <div class="dashboard-menu-item" onclick="profile()">Profile
+                                                            </div>
+                                                            <div class="dashboard-menu-item" onclick="account()">Account
+                                                            </div>
+                                                            <div class="dashboard-menu-item" onclick="earnings()">Earning
+                                                            </div>
+                                                            <div class="dashboard-menu-item" onclick="logout()">Sign Out
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -271,6 +270,7 @@
                             </div>
                             <div class="nav-txt">Login</div>
                         </a>
+
                     </div> <!-- main header @e -->
                     <style>
                         .nav-tabs .nav-link:after {
@@ -278,21 +278,3 @@
                         }
                     </style>
                     @stack('footer-style')
-                    <script>
-                        const userId = $("#user_id").val();
-                        function profile() {
-                            location.href = `/profile/${userId}`;
-                        }
-
-                        function account() {
-                            location.href = '/account';
-                        }
-
-                        function earnings() {
-                            location.href = '/earnings';
-                        }
-
-                        function logout() {
-                            location.href = '/logout';
-                        }
-                    </script>
