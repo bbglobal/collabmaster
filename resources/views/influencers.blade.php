@@ -727,7 +727,7 @@
                                         <a class="pagination-arrow-holder" href="#">
                                             <div>Next Page</div>
                                             <img class="pagination-arrow"
-                                                src="assets/websiteImages/creatorMarketplace/arrow.svg"
+                                                src="{{ url('assets/websiteImages/creatorMarketplace/arrow.svg') }}"
                                                 style="margin-left: 8px" loading="lazy">
                                         </a>
                                     </div>

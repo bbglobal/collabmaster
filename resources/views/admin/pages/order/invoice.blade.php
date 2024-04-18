@@ -35,7 +35,7 @@
               </div>
 
               <div class="mb-3">
-                <label for="name" class="form-label">Delivery Status: @if(!empty($order)) {{$order->status}} @endif</label>
+                <label for="name" class="form-label">Payment Status: @if(!empty($order)) {{$order->payment_status}} @endif</label>
               </div>
              
           </form>

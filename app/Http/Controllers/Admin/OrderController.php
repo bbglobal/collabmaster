@@ -12,36 +12,41 @@ use Validator;
 class OrderController extends Controller
 {
     //
-    public function order_view(){
+    public function order_view()
+    {
         $orders = Order::all();
-        return view('admin.pages.order.table',compact('orders'));
+        return view('admin.pages.order.table', compact('orders'));
     }
 
-    public function email_activity_view(){
-        $activities = User::select('id','email')->get();
-        return view('admin.pages.activity.email_activity',compact('activities'));
+    public function email_activity_view()
+    {
+        $activities = User::select('id', 'email')->get();
+        return view('admin.pages.activity.email_activity', compact('activities'));
     }
 
-    public function email_log_view(){
+    public function email_log_view()
+    {
         $brands = User::all();
-        return view('admin.pages.activity.email_log',compact('brands'));
+        return view('admin.pages.activity.email_log', compact('brands'));
     }
 
-    public function order_edit($id){
+    public function order_edit($id)
+    {
         $order = Order::find($id);
         // dd($order);
-        return view('admin.pages.order.order_edit',compact('order'));
+        return view('admin.pages.order.order_edit', compact('order'));
     }
 
-    public function invoice_view(){
+    public function invoice_view()
+    {
         $orders = Order::all();
-        return view('admin.pages.invoice.table',compact('orders'));
+        return view('admin.pages.invoice.table', compact('orders'));
     }
 
     public function order_view_invoice($id)
     {
         $order = Order::find($id);
-        return view('admin.pages.order.invoice',compact('order'));
+        return view('admin.pages.order.invoice', compact('order'));
     }
 
     public function order_update(Request $req)
@@ -53,9 +58,7 @@ class OrderController extends Controller
             "description" => "required",
             "package_content_type" => "required",
             "price" => "required",
-            "status" => "required"
-
-
+            "payment_status" => "required"
         );
 
         $validator = Validator::make($controlls, $rules);
@@ -68,7 +71,7 @@ class OrderController extends Controller
             $status->description = $req->description;
             $status->package_content_type = $req->package_content_type;
             $status->price = $req->price;
-            $status->status = $req->status;
+            $status->payment_status = $req->payment_status;
 
             $status->save();
 

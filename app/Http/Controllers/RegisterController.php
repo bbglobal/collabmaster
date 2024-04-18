@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\NewUserNotification;
 use App\Mail\VerificationEmail;
@@ -11,6 +10,7 @@ use App\Models\Campaign;
 use App\Models\Creator;
 use App\Models\Offer;
 use App\Models\Package;
+use App\Models\Proposal;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Verified;
@@ -57,13 +57,13 @@ class RegisterController extends Controller
         return redirect("/verify-email")->with("success", "Your Account Registered Successfully");
     }
 
-    public function creatorSingup(Request $request, $username)
+    public function creatorSingup(Request $request, $name)
     {
         $request->validate([
             'name' => 'required|unique:users'
         ]);
 
-        session()->put('creator_username', $username);
+        session()->put('name', $name);
 
         return view("creator-signup");
     }
@@ -78,7 +78,7 @@ class RegisterController extends Controller
 
         $user = User::create([
 
-            'username' => session()->get('creator_username'),
+            'name' => session()->get('name'),
             'full_name' => $request['full_name'],
             'full_name' => $request['full_name'],
             'email' => $request['email'],
@@ -738,5 +738,20 @@ class RegisterController extends Controller
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('user.login')->with('status', __($status))
             : back()->with('email', __($status));
+    }
+
+    public function submitProposal(Request $request, $id)
+    {
+        // dd($request->all());
+        $proposals = new Proposal();
+        $proposals->proposal = $request->input('proposal');
+        $proposals->price = $request->input('price');
+        $proposals->duration = $request->input('duration');
+        $proposals->campaign_id = $id;
+        $proposals->brand_id = $request->input('brand_id');
+        $proposals->creator_id = $request->input('creator_id');
+        $proposals->save();
+
+        return redirect('campaigns')->with('success', 'Your Porposal submited successfully');
     }
 }

@@ -12,6 +12,7 @@ class Campaign extends Model
     protected $fillable = [
         '_token',
         'platform',
+        'brand',
         'website',
         'instagram_username',
         'tiktok_username',

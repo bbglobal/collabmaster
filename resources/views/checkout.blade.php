@@ -471,12 +471,12 @@
                     <div class="form-title">Place Order</div>
 
                     <!--<div class="form-desc">A hold on your payment method will be placed for 72 hours. You will only be charged if Ina accepts your request.</div>-->
-                    <div class="form-desc">Your payment will be held for 72 hours. If Ina declines the order, the amount
+                    <div class="form-desc">Your payment will be held for 72 hours. If {{ $package->name }} declines the order, the amount
                         will be added to your Collabstr balance.</div>
 
 
                     <div class="checkout-row">
-                        <form class="checkout-col checkout-form" method="POST">
+                        <form class="checkout-col checkout-form">
                             @csrf
                             {{-- <input type="hidden" id="token" value="{{Auth::user()->id}}"> --}}
                             <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
@@ -585,7 +585,7 @@
                                 <div class="guide-num">1</div>Place Order
                             </div>
                             <!--<div class="guide-txt">Submit the details of the collaboration. Ina has 72 hours to accept your request before the hold on your card is removed.</div>-->
-                            <div class="guide-txt">Submit the details of the collaboration. Ina has 72 hours to accept your
+                            <div class="guide-txt">Submit the details of the collaboration. {{ $package->name }} has 72 hours to accept your
                                 request, otherwise the amount is added to your Collabstr balance.</div>
                         </div>
 
@@ -593,7 +593,7 @@
                             <div class="guide-title">
                                 <div class="guide-num">2</div>Chat With Influencer
                             </div>
-                            <div class="guide-txt">Chat with Ina and arrange the collaboration. Your funds are held
+                            <div class="guide-txt">Chat with {{ $package->package_quantity_ }} and arrange the collaboration. Your funds are held
                                 securely
                                 until they complete the work.</div>
                         </div>
@@ -634,17 +634,17 @@
                         if (response.status) {
                             var orderId = response.data.id;
                             var options = {
-                                "key": "{{ env('RAZORPAYKEY') }}", // Enter the Key ID generated from the Dashboard
-                                "amount": price, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                                "key": "{{ env('RAZORPAYKEY') }}",
+                                "amount": price,
                                 "currency": "INR",
-                                "name": "Collab Master", //your business name
+                                "name": "Collab Master",
                                 "description": "",
                                 "image": "https://example.com/your_logo",
-                                "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                                "order_id": orderId,
                                 "handler": function(response) {
                                     function calculateHmacSHA256(data, key) {
                                         return CryptoJS.HmacSHA256(data, key).toString(CryptoJS.enc
-                                            .Hex);
+                                        .Hex);
                                     }
                                     var razorpayOrderId = response.razorpay_order_id;
                                     var razorpayPaymentId = response.razorpay_payment_id;
@@ -700,7 +700,7 @@
                                 "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
                                     "name": name, //your customer's name
                                     "email": email,
-                                    "contact": phone_number //Provide the customer's phone number for better conversion rates
+                                    "contact": phone_number//Provide the customer's phone number for better conversion rates
                                 },
                                 "notes": {
                                     "address": "Razorpay Corporate Office"

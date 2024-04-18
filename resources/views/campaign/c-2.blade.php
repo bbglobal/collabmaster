@@ -42,7 +42,7 @@
                                         id="form">
                                         @csrf
                                         <div class="form-group mb-3">
-                                            <textarea name="" class="form-control form-control-lg" autofocus id="" cols="30" rows="5"
+                                            <textarea name="brand" class="form-control form-control-lg" autofocus id="" cols="30" rows="5"
                                                 placeholder="What do you sell? What is your mission? Be specific as this is how influencers will learn more about your brand."></textarea>
                                         </div>
                                         <div class="form-group mb-3">

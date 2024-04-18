@@ -5,6 +5,13 @@
         #msg-holder {
             display: none;
         }
+        .profile-listing-owner-holder {
+            text-transform:capitalize;
+            margin-top: -4rem;
+            padding: 0 2rem;
+            color: #fff;
+            position: relative;
+        }
     </style>
 @endpush
 
@@ -115,16 +122,18 @@
                             <div class="profile-listing-holder">
                                 <a href="/brandboostesr/{{ $row->slug }}" target="_blank"><span
                                         class="link-spanner"></span></a>
-                                <div class="profile-listing-img-holder">
-                                    <img loading="lazy" class="profile-listing-img" alt="{{ $row->name }}'s campaign"
-                                        src="{{ url('assets/images/' . $row->file_path) }}">
-                                    <div class="profile-listing-owner-holder">
-                                        <div class="profile-listing-owner-info-holder">
-                                            <div class="profile-listing-owner-name">{{ $row->name }}</div>
-                                            <div class="profile-listing-owner-location">{{ $row->location }}</div>
+                                <a href="{{ route('show.campaign', ['id' => $row->id]) }}">
+                                    <div class="profile-listing-img-holder">
+                                        <img loading="lazy" class="profile-listing-img" alt="{{ $row->platform }}'s campaign"
+                                            src="{{ url('/assets/images/'. $row->img_1 ) }}">
+                                        <div class="profile-listing-owner-holder">
+                                            <div class="profile-listing-owner-info-holder">
+                                                <div class="profile-listing-owner-name">{{ $row->product_summary }}</div>
+                                                <div class="profile-listing-owner-location">{{ $row->brand }}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>

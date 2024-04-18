@@ -30,8 +30,7 @@
                                     <div class="search-holder">
                                         <div class="filter-section platform-filter-section">
                                             <div class="filter-title">Platform</div>
-                                            <div class="js-filter-placeholder filter-placeholder"
-                                            >Choose a platform</div>
+                                            <div class="js-filter-placeholder filter-placeholder">Choose a platform</div>
                                             <div class="filter-dropdown-holder platform-dropdown-holder">
                                                 <div class="filter-dropdown-option" data-id="">Any</div>
 
@@ -275,7 +274,7 @@
                                         <div class="d-flex justify-content-between">
                                             <p class="text-gray p-0 m-0 ">Hire top influencers across all
                                                 platforms</p>
-                                            <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                            <a href="{{ route('explore') }}" class="text-black"><b>see all</b></a>
                                         </div>
                                     </article>
                                 </div><!-- .nk-block -->
@@ -329,7 +328,7 @@
                                         <h3 class="mb-0 pb-0">Instagram</h3>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-gray p-0 m-0 ">Hire Instagram influencers</p>
-                                            <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                            <a href="{{ route('explore') }}" class="text-black"><b>see all</b></a>
                                         </div>
                                     </article>
                                 </div><!-- .nk-block -->
@@ -415,7 +414,7 @@
                                         <h3 class="mb-0 pb-0">Tiktok</h3>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-gray p-0 m-0 ">Hire Instagram influencers</p>
-                                            <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                            <a href="{{ route('explore') }}" class="text-black"><b>see all</b></a>
                                         </div>
                                     </article>
                                 </div><!-- .nk-block -->
@@ -471,7 +470,7 @@
                                     </article>
                                 </div><!-- .nk-block -->
                                 <div class="listing-row mb-4">
-                                    <a href="{{ url('influencers/search?c=Travel') }}"
+                                    <a href="{{ url('influencers/search?p=&c=Travel+&l=&l_id=&pmi=50&pmx=3000&fmi=0&fmx=1000000') }}"
                                         class="d-block profile-listing-holder custom-col-4 m-0 mb-4"
                                         style="padding: 0 0.5rem !important;">
                                         <div class="card h-100 p-0">
@@ -491,7 +490,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="{{ url('influencers/search?c=Beauty') }}"
+                                    <a href="{{ url('influencers/search?p=&c=Beauty+&l=&l_id=&pmi=50&pmx=3000&fmi=0&fmx=1000000') }}"
                                         class="d-block profile-listing-holder custom-col-4 m-0 mb-4"
                                         style="padding: 0 0.5rem !important;">
                                         <div class="card h-100 p-0">
@@ -511,7 +510,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="{{ url('influencers/search?c=Music%20&%20Dance') }}"
+                                    <a href="{{ url('influencers/search?p=&c=Music%20&%20Dance+&l=&l_id=&pmi=50&pmx=3000&fmi=0&fmx=1000000') }}"
                                         class="d-block profile-listing-holder custom-col-4 m-0 mb-4"
                                         style="padding: 0 0.5rem !important;">
                                         <div class="card h-100 p-0">
@@ -531,7 +530,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="{{ url('influencers/search?c=Fashion') }}"
+                                    <a href="{{ url('influencers/search?p=&c=Fashion+&l=&l_id=&pmi=50&pmx=3000&fmi=0&fmx=1000000') }}"
                                         class="d-block profile-listing-holder custom-col-4 m-0 mb-4"
                                         style="padding: 0 0.5rem !important;">
                                         <div class="card h-100 p-0">
@@ -1020,9 +1019,10 @@
                                 <article class="entry">
                                     <h3 class="mb-0 pb-0">What Brands Say About Us</h3>
                                 </article>
-                            </div><!-- .nk-block -->
+                            </div>
+                            <!-- .nk-block -->
                             <div class="row mb-4">
-                                <div class="col-sm-12 col-md-4 col-lg-4 m-0 mb-4" style="padding: 0 0.5rem !important;">
+                                <div class="col-sm-12 col-md-12 col-lg-4 m-0 mb-4" style="padding: 0 0.5rem !important;">
                                     <div class="card h-100 p-0 px-3">
                                         <div class="card-inner p-0">
                                             <div class="project">
@@ -1047,7 +1047,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-4 col-lg-4 m-0 mb-4" style="padding: 0 0.5rem !important;">
+                                <div class="col-sm-12 col-md-12 col-lg-4 m-0 mb-4" style="padding: 0 0.5rem !important;">
                                     <div class="card h-100 p-0 px-3">
                                         <div class="card-inner p-0">
                                             <div class="project">
@@ -1071,7 +1071,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-4 col-lg-4 m-0 mb-4" style="padding: 0 0.5rem !important;">
+                                <div class="col-sm-12 col-md-12 col-lg-4 m-0 mb-4" style="padding: 0 0.5rem !important;">
                                     <div class="card h-100 p-0 px-3">
                                         <div class="card-inner p-0">
                                             <div class="project">
@@ -1105,7 +1105,7 @@
                                     <h3 class="mb-0 pb-0">YouTube</h3>
                                     <div class="d-flex justify-content-between">
                                         <p class="text-gray p-0 m-0 ">Hire YouTube influencers</p>
-                                        <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                        <a href="{{ route('explore') }}" class="text-black"><b>see all</b></a>
                                     </div>
                                 </article>
                             </div><!-- .nk-block -->
@@ -1160,7 +1160,7 @@
                                     <h3 class="mb-0 pb-0">User Generated Content</h3>
                                     <div class="d-flex justify-content-between">
                                         <p class="text-gray p-0 m-0 ">Purchase high-quality UGC</p>
-                                        <a href="{{route('explore')}}" class="text-black"><b>see all</b></a>
+                                        <a href="{{ route('explore') }}" class="text-black"><b>see all</b></a>
                                     </div>
                                 </article>
                             </div><!-- .nk-block -->
@@ -1444,7 +1444,7 @@
                                                 </h2>
                                                 <h3 class="cta-txt text-white">Search Instagram, TikTok, and
                                                     YouTube influencers.</h3>
-                                                <a href="{{route('influencer.search')}}">
+                                                <a href="{{ route('influencer.search') }}">
                                                     <div class="btn cta-btn font-100 py-3 px-4 mt-2">Search
                                                         Influencers</div>
                                                 </a>

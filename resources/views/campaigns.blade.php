@@ -97,63 +97,90 @@
             margin: 0;
         }
 
-        #msg-holder {
-            display: none;
+        .profile-listing-owner-holder {
+            text-transform: capitalize;
+            margin-top: -4rem;
+            padding: 0 2rem;
+            color: #fff;
+            position: relative;
         }
     </style>
 @endpush
 
 @section('main-section')
     <link rel="stylesheet" href="{{ url('assets/css/banner.css') }}">
-    <div id="msg-holder">
-        <div id="msg-holder-row">
-            <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/succ.svg" class="succ-err-msg-img"
-                id="msg-img-succ">
-            <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/err.svg" class="succ-err-msg-img"
-                id="msg-img-err">
-            <div id="msg"></div>
+    @if ($message = session('success'))
+        <div id="msg-holder">
+            <div id="msg-holder-row">
+                <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/succ.svg"
+                    class="succ-err-msg-img" id="msg-img-err">
+                <div id="msg">{{ $message }}</div>
+            </div>
         </div>
-    </div>
+    @endif
     <div id="content">
         <div class="page-holder">
             <div class="campaign-info-holder">
                 <h1 class="lists-title">Campaigns</h1>
-                <a href="{{ route('start.campaign', ['id' => 1]) }}" class="create-btn"><img class="create-btn-img"
-                        src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/create.svg">Create
-                    Campaign</a>
+                @if (Auth::user()->role == 'brand')
+                    <a href="{{ route('start.campaign', ['id' => 1]) }}" class="create-btn"><img class="create-btn-img"
+                            src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/create.svg">Create
+                        Campaign</a>
+                @endif
             </div>
 
 
             <br><br>
-            <div class="example-row-holder row-holder example-row-holder-reverse">
-                <div class="example-img-holder">
-                    <picture>
-                        <source media='(max-width: 800px)'
-                            srcset='https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/brandPage/campaignSmall.png'>
-                        <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/brandPage/campaign.png"
-                            class="example-img" alt="Influencer campaign brief" loading="lazy">
-                    </picture>
-                </div>
-                <div class="example-steps-holder">
-                    <h2 class="example-row-title">Save Hours With Campaigns and Work With Influencers at Scale</h2>
+            @if ($campaigns->isEmpty())
+                <div class="example-row-holder row-holder example-row-holder-reverse">
+                    <div class="example-img-holder">
+                        <picture>
+                            <source media='(max-width: 800px)'
+                                srcset='https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/brandPage/campaignSmall.png'>
+                            <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/brandPage/campaign.png"
+                                class="example-img" alt="Influencer campaign brief" loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="example-steps-holder">
+                        <h2 class="example-row-title">Save Hours With Campaigns and Work With Influencers at Scale</h2>
 
-                    <div class="example-step">
-                        <h3 class="example-step-title">Create Campaigns</h3>
-                        <div class="example-step-txt">Centralize your images, requirements, content examples, and more in a
-                            campaign brief.</div>
-                    </div>
-                    <div class="example-step">
-                        <h3 class="example-step-title">Add Influencers</h3>
-                        <div class="example-step-txt">Search and add influencers to your campaign in seconds.</div>
-                    </div>
-                    <div class="example-step">
-                        <h3 class="example-step-title">Send to Influencers</h3>
-                        <div class="example-step-txt">Order from influencers in a single click by sending your campaign.
+                        <div class="example-step">
+                            <h3 class="example-step-title">Create Campaigns</h3>
+                            <div class="example-step-txt">Centralize your images, requirements, content examples, and more
+                                in a
+                                campaign brief.</div>
+                        </div>
+                        <div class="example-step">
+                            <h3 class="example-step-title">Add Influencers</h3>
+                            <div class="example-step-txt">Search and add influencers to your campaign in seconds.</div>
+                        </div>
+                        <div class="example-step">
+                            <h3 class="example-step-title">Send to Influencers</h3>
+                            <div class="example-step-txt">Order from influencers in a single click by sending your campaign.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+            @else
+                <div class="packages-holder">
+                    @foreach ($campaigns as $row)
+                        <div class="profile-listing-holder">
+                            <a href="{{ route('campaign.details', ['id' => $row->id]) }}">
+                                <div class="profile-listing-img-holder">
+                                    <img loading="lazy" class="profile-listing-img" alt="{{ $row->platform }}'s campaign"
+                                        src="{{ url('/assets/images/' . $row->img_1) }}">
+                                    <div class="profile-listing-owner-holder">
+                                        <div class="profile-listing-owner-info-holder">
+                                            <div class="profile-listing-owner-name">{{ $row->product_summary }}</div>
+                                            <div class="profile-listing-owner-location">{{ $row->brand }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 @endsection

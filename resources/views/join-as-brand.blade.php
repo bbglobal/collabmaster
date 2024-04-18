@@ -36,11 +36,13 @@
                                 </div>
                                 <div class="row justify-around mb-5">
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
-                                        <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/buzzfeed.svg"
-                                            alt="Buzzfeed logo" loading="lazy">
+                                        <img class="partner-img"
+                                            src="assets/websiteImages/creatorMarketplace/logos/buzzfeed.svg" alt="Buzzfeed logo"
+                                            loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
-                                        <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/bloomberg.svg"
+                                        <img class="partner-img"
+                                            src="assets/websiteImages/creatorMarketplace/logos/bloomberg.svg"
                                             alt="Bloomberg logo" loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
@@ -232,11 +234,13 @@
                                 </div>
                                 <div class="row justify-around mb-5">
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
-                                        <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/buzzfeed.svg"
+                                        <img class="partner-img"
+                                            src="assets/websiteImages/creatorMarketplace/logos/buzzfeed.svg"
                                             alt="Buzzfeed logo" loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
-                                        <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/bloomberg.svg"
+                                        <img class="partner-img"
+                                            src="assets/websiteImages/creatorMarketplace/logos/bloomberg.svg"
                                             alt="Bloomberg logo" loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
@@ -248,8 +252,9 @@
                                             alt="Forbes logo" loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
-                                        <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/shopify.svg"
-                                            alt="Shopify logo" loading="lazy">
+                                        <img class="partner-img"
+                                            src="assets/websiteImages/creatorMarketplace/logos/shopify.svg" alt="Shopify logo"
+                                            loading="lazy">
                                     </div>
                                 </div>
                             </div>
@@ -272,4 +277,57 @@
                                     </div>
                                 </div>
                             </div><!-- .nk-block -->
+
+                            <script>
+                                let arr = ['Product Photos', 'Sponsored Posts', 'Testimonials', 'Video Ads'];
+                                let txtIdx = 0;
+                                let change = $('.change-txt');
+
+                                function changeTxt() {
+                                    if (txtIdx === arr.length - 1) {
+                                        txtIdx = 0;
+                                    } else {
+                                        txtIdx += 1;
+                                    }
+                                }
+
+                                function typeBackwards() {
+                                    let currTxt = change.text();
+                                    if (!currTxt) {
+                                        // start typing forwards in 0.4 seconds
+                                        changeTxt();
+                                        setTimeout(typeForwards, 400);
+                                    } else {
+                                        currTxt = arr[txtIdx].substring(0, currTxt.length - 1);
+                                        change.text(currTxt);
+                                        setTimeout(typeBackwards, 70);
+                                    }
+                                }
+
+                                function typeForwards() {
+                                    let currTxt = change.text();
+                                    if (currTxt === arr[txtIdx]) {
+                                        // start typing backwards in 1 seconds
+                                        setTimeout(typeBackwards, 1000);
+                                    } else {
+                                        currTxt = arr[txtIdx].substring(0, currTxt.length + 1);
+                                        change.text(currTxt);
+                                        setTimeout(typeForwards, 70);
+                                    }
+                                }
+
+                                typeForwards();
+
+                                $('.faq-holder').click(function() {
+                                    let answer = $(this).find('.faq-answer');
+                                    let img = $(this).find('.faq-btn');
+                                    if (answer.is(":visible")) {
+                                        answer.slideUp();
+                                        img.css('transform', 'rotateZ(0deg)');
+                                    } else {
+                                        answer.slideDown();
+                                        img.css('transform', 'rotateZ(45deg)');
+                                    }
+                                });
+                            </script>
                         @endsection

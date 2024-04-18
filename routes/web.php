@@ -133,6 +133,8 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/profile/{id}',  'profile')->name('profile.page');
     Route::get('/edit-page/{id}',  'editProfile')->name('profile.edit');
     Route::get('/start-campaign/{id}',  'createCampaign')->name('start.campaign');
+    Route::get('/campaign/{id}',  'showCampain')->name('show.campaign');
+    Route::get('/campaign-details/{id}',  'campainDetails')->name('campaign.details');
     Route::get('/get-started/{id}',  'getStarted')->name('get.started');
     Route::get('/phone-verifcation',  'phoneNumber')->name('phone.number');
     Route::get('/verify-phone-number',  'otp')->name('verification.form');
@@ -157,7 +159,7 @@ Route::controller(IndexController::class)->group(function () {
 
 Route::controller(RegisterController::class)->group(function () {
     Route::post('/create-page/{id}',  'createPage')->name('create.page');
-    Route::post('/creator-signup/{username}',  'creatorSingup')->name('creator.signup');
+    Route::post('/creator-signup/{name}',  'creatorSingup')->name('creator.signup');
     Route::post('/brand-signup',  'brandRegister')->name('brand.register');
     Route::post('/login',  'login')->name('login');
     Route::post('/create-page',  'creatorRegister')->name('creator.register');
@@ -172,7 +174,9 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('/phone-verifcation',  'phoneVerification')->name('phone.verify');
     Route::post('/verify-phone-number',  'verification_form_process')->name('verification.process');
     Route::post('/create-offer/{id}',  'createOffer')->name('offer.create');
+    
     Route::post('/edit-page/{id}',  'editProfile')->name('profile.update');
+    Route::post('submit-proposal/{id}',  'submitProposal')->name('submit.proposal');
 
     Route::get('/google', 'redirectToGoogle')->name('login.google');
     Route::any('/google/callback', 'handleGoogleCallBack');

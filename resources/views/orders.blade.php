@@ -82,7 +82,7 @@
         </div>
     </div>
     <div id="content">
-        @if (Auth::user()->role == 'creator' && count($orders) > 0)
+        @if (Auth::user()->role == 'creator')
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -102,11 +102,15 @@
                         <small>{{ $order->description }}</small>
                     </div>
                     <div class="order-state">
-                        @if ($order->conformation_status == 'Accepted')
+                        @if ($order->payment_status == 'Pending')
                             <button type="button" class="btn no-orders-btn" style="margin: 1rem;" disabled>
-                                Accepted
+                                Pending
                             </button>
-                        @elseif($order->conformation_status == 'Decline')
+                        @elseif($order->payment_status == 'Completed')
+                            <button type="button" class="btn no-orders-btn" style="margin: 1rem;" disabled>
+                                Completed
+                            </button>
+                        @elseif($order->payment_status == 'Decline')
                             <button type="button" class="btn no-orders-btn" style="margin: 1rem;" disabled>
                                 Decline
                             </button>
@@ -114,14 +118,14 @@
                             <form action="{{ route('order.conformation.process') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $order->id }}">
-                                <input type="hidden" name="conformation_status" value="Accepted">
+                                <input type="hidden" name="payment_status" value="Completed">
                                 <button type="submit" class="btn no-orders-btn" style="margin: 1rem;">Accept</button>
                             </form>
 
                             <form action="{{ route('order.conformation.process') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $order->id }}">
-                                <input type="hidden" name="conformation_status" value="Decline">
+                                <input type="hidden" name="payment_status" value="Decline">
                                 <button type="submit" class="btn no-orders-outline-btn"
                                     style="margin: 1rem;">Decline</button>
                             </form>
@@ -161,5 +165,12 @@
             textArea.remove();
             showMsg('Profile URL copied to clipboard.', 'succ')
         }
+
+        $('#accept').click((event) => {
+            $(event.target).text('Confirm Accept');
+        });
+        $('#decline').click((event) => {
+            $(event.target).text('Confirm Decline');
+        });
     </script>
 @endsection

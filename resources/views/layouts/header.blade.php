@@ -155,7 +155,7 @@
                                                 <a href="#" class="nk-menu-link">
                                                     <div class="dashboard-menu-holder">
                                                         <div class="dashboard-menu-btn">|||</div>
-                                                        <img class="dashboard-img" src="{{ Auth::user()->avatar }}">
+                                                        <img class="dashboard-img" src="{{ url(Auth::user()->avatar) }}">
                                                         <div class="dashboard-menu">
                                                             <div class="dashboard-menu-item"  onclick="profile()">Profile
                                                             </div>
@@ -197,7 +197,7 @@
                                                 <a href="#" class="nk-menu-link">
                                                     <div class="dashboard-menu-holder">
                                                         <div class="dashboard-menu-btn">|||</div>
-                                                        <img class="dashboard-img" src="{{ Auth::user()->avatar }}">
+                                                        <img class="dashboard-img" src="{{ url(Auth::user()->avatar) }}">
                                                         <div class="dashboard-menu">
                                                             <div class="dashboard-menu-item" onclick="profile()">Profile</div>
                                                             <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
@@ -217,7 +217,7 @@
                     </div>
                     <div class="mobile-nav-holder">
 
-                        <a class="mobile-nav-item" href="influencers.html">
+                        <a class="mobile-nav-item" href="{{ route('explore') }}">
                             <div class="nav-img-holder">
                                 <svg class="nav-img nav-img-stroke" viewbox="0 0 32 32">
                                     <g fill="none">
@@ -230,7 +230,7 @@
                             <div class="nav-txt">Explore</div>
                         </a>
 
-                        <a class="mobile-nav-item" href="join-as-brand.html">
+                        <a class="mobile-nav-item" href="{{ route('join.brand') }}">
                             <div class="nav-img-holder">
                                 <svg class="nav-img" viewbox="0 0 24 24">
                                     <g>
@@ -243,7 +243,7 @@
                             <div class="nav-txt">Brand</div>
                         </a>
 
-                        <a class="mobile-nav-item" href="join-as-creator.html">
+                        <a class="mobile-nav-item" href="{{ route('join.creator') }}">
                             <div class="nav-img-holder">
                                 <svg class="nav-img nav-img-stroke" viewbox="0 0 24 24">
                                     <g>
@@ -261,7 +261,7 @@
                             <div class="nav-txt">Influencer</div>
                         </a>
 
-                        <a class="mobile-nav-item" href="login.html">
+                        <a class="mobile-nav-item" href="{{ route('user.login') }}">
                             <div class="nav-img-holder">
                                 <svg class="nav-img" viewbox="0 0 32 32">
                                     <path

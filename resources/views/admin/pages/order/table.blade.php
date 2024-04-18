@@ -23,7 +23,7 @@
 
     <div class="row">
 
-        
+
         <div class="col-md-12 grid-margin stretch-card">
 
             <div class="card">
@@ -40,8 +40,7 @@
                                     <th>Description</th>
                                     <th>Package Content Type</th>
                                     <th>Price</th>
-                                    <th>Delivery Status</th>
-                                    <th>Conformation Status</th>
+                                    <th>Payment Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -54,33 +53,40 @@
                                         <td>{{ $order->description }}</td>
                                         <td>{{ $order->package_content_type }}</td>
                                         <td>{{ $order->price }}</td>
-                                        <td>{{ $order->status }}</td>
                                         <td>
-                                            @if($order->conformation_status == 'Accepted')
-                                            <span class="text-success">
-                                                Accepted
-                                            </span>
-                                            @elseif($order->conformation_status == 'Decline')
-                                            <span class="text-danger">
-                                                Decline
-                                            </span>
+                                            @if ($order->payment_status == 'Completed')
+                                                <span class="text-success">
+                                                    Accepted
+                                                </span>
+                                            @elseif($order->payment_status == 'Decline')
+                                                <span class="text-danger">
+                                                    Decline
+                                                </span>
+                                            @elseif($order->payment_status == 'Pending')
+                                                <span class="text-warning">
+                                                    Pending
+                                                </span>
+                                            @elseif($order->payment_status == 'Approved')
+                                                <span class="text-info">
+                                                    Approved
+                                                </span>
                                             @endif
-                                         </td>
+                                        </td>
 
-                                         <td>
-                                            <a class="edit"
-                                                href="{{route('admin.invoice',['id'=>$order->id])}}" target="_blank">
+                                        <td>
+                                            <a class="edit" href="{{ route('admin.invoice', ['id' => $order->id]) }}"
+                                                target="_blank">
                                                 <i class="link-icon" data-feather="eye"></i>
 
                                             </a>
 
-                                            <a class="edit"
-                                                href="{{route('admin.order.edit',['id'=>$order->id])}}" target="_blank">
+                                            <a class="edit" href="{{ route('admin.order.edit', ['id' => $order->id]) }}"
+                                                target="_blank">
                                                 <i class="link-icon" data-feather="edit"></i>
 
                                             </a>
-                                         </td>
-                                        </tr>
+                                        </td>
+                                    </tr>
                                 @endforeach
 
                             </tbody>

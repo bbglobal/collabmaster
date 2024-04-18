@@ -3,6 +3,15 @@
 @section('main-section')
     <!-- content @s
         -->
+        @error('name')
+            <div id="msg-holder">
+                <div id="msg-holder-row">
+                    <img src="https://d5ik1gor6xydq.cloudfront.net/websiteImages/creatorMarketplace/err.svg" id="msg-img-err"
+                        class="succ-err-msg-img">
+                    <div id="msg">{{ $message }}</div>
+                </div>
+            </div>
+        @enderror
         <div class="nk-content main-outer-container">
             <div class="container-fluid">
                 <div class="nk-content-inner">
@@ -23,7 +32,7 @@
                                             <div class="username-holder">
                                                 <div class="username-domain">collabmaster.com/</div>
                                                 <div class="username-input-holder">
-                                                    <input type="text" name="username" class="username-input"
+                                                    <input type="text" name="name" class="username-input"
                                                         placeholder="yourname" id="username">
                                                 </div>
                                                 <button type="submit" class="username-btn" id="primary">
@@ -150,8 +159,9 @@
                                             alt="ClickUp logo" loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
-                                        <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/hopper.svg"
-                                            alt="Hopper logo" loading="lazy">
+                                        <img class="partner-img"
+                                            src="assets/websiteImages/creatorMarketplace/logos/hopper.svg" alt="Hopper logo"
+                                            loading="lazy">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-2 col-lg-2 logo-holder">
                                         <img class="partner-img" src="assets/websiteImages/creatorMarketplace/logos/un.svg"
@@ -1127,7 +1137,7 @@
                                             <h2 class="cta-title text-white">Find and Hire Influencers</h2>
                                             <h3 class="cta-txt text-white">Search Instagram, TikTok, and YouTube
                                                 influencers.</h3>
-                                            <a href="influencers.html">
+                                            <a href="{{ route('explore') }}">
                                                 <div class="btn cta-btn font-100 py-3 px-4 mt-2">Search Influencers</div>
                                             </a>
                                         </div>
@@ -1148,7 +1158,7 @@
 
         <script>
             $(document).ready(function() {
-                $('form').submit(function(event) {
+                $('#form').submit(function(event) {
                     event.preventDefault();
 
                     $('#primary').addClass("d-none");

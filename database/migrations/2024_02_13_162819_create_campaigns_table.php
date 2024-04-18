@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->string("platform")->nullable();
+            $table->string("brand")->nullable();
             $table->string("website")->nullable();
             $table->string("instagram_username")->nullable();
             $table->string("tiktok_username")->nullable();

@@ -147,13 +147,13 @@
                                                     <select class="input package-content-type-select" name="content_type_0">
                                                         <option value="" disabled selected hidden>Choose Content Type
                                                         </option>
-                                                        <option value="10">Instagram Photo Feed Post</option>
+                                                        <option value="Instagram Photo Feed Post">Instagram Photo Feed Post</option>
 
-                                                        <option value="12">Instagram Reel</option>
+                                                        <option value="Instagram Reel">Instagram Reel</option>
 
-                                                        <option value="13">Instagram Story</option>
+                                                        <option value="Instagram Story">Instagram Story</option>
 
-                                                        <option value="14">Instagram Live</option </select>
+                                                        <option value="Instagram Live">Instagram Live</option </select>
 
                                                         <input class="input quantity-input" name="quantity_0" type="number"
                                                             placeholder="Quantity" value="">

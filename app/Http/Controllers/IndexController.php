@@ -11,6 +11,7 @@ use App\Models\Creator;
 use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Package;
+use App\Models\Proposal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
 use Throwable;
 use Validator;
+
+use function PHPUnit\Framework\isNull;
 
 class IndexController extends Controller
 {
@@ -363,10 +366,16 @@ class IndexController extends Controller
 
     public function orders()
     {
-        $orders = Order::where('creator_id', Auth::user()->id)->get();
-        $offers = Offer::where('creator_id', Auth::user()->id)->get();
-
-        return view("orders", compact('orders', 'offers'));
+        $user = auth()->user();
+        if ($user->role === 'brand') {
+            $orders = Order::where('brand_id', $user->id)->get();
+        } elseif ($user->role === 'creator') {
+            $orders = Order::where('creator_id', $user->id)->get();
+        } else {
+            $orders = Order::all();
+        }
+        // dd($orders);
+        return view("orders", compact('orders'));
     }
 
     public function chat($id)
@@ -392,6 +401,14 @@ class IndexController extends Controller
 
         $data = compact('package');
         return view("checkout")->with($data);
+
+        // $package = Package::join('creators', 'packages.user_id', '=', 'creators.user_id')
+        //     ->where('packages.id', $id)
+        //     ->select('packages.*', 'creators.*')
+        //     ->first();
+
+        // $data = compact('package');
+        // return view("checkout")->with($data);
     }
 
     public function createOffer($id)
@@ -412,7 +429,25 @@ class IndexController extends Controller
 
     public function campaigns()
     {
-        return view("campaigns");
+        $campaigns = campaign::all();
+        $data = compact('campaigns');
+        return view("campaigns")->with($data);
+    }
+
+    public function campainDetails($id)
+    {
+        if (!Auth::user()) {
+            return redirect('login');
+        }
+
+        $campaign = campaign::find($id);
+        $proposal = Proposal::join('users', 'proposals.creator_id', '=', 'users.id')
+            ->where('campaign_id', $id)
+            ->select('proposals.*', 'users.*')
+            ->get();
+
+        $data = compact('campaign', 'proposal');
+        return view('campain-details')->with($data);
     }
 
     public function earnings()
@@ -477,7 +512,7 @@ class IndexController extends Controller
         return view("get-started");
     }
 
-    function logout()
+    public function logout()
     {
         Auth::logout();
 
@@ -620,6 +655,16 @@ class IndexController extends Controller
             default:
                 abort(404);
         }
+    }
+
+
+
+    public function showCampain($id)
+    {
+        $campaign = Campaign::find($id);
+
+        $data = compact('campaign');
+        return view('view-campaign')->with($data);
     }
 
     public function order_process(Request $request)
